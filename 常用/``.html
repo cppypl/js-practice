@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>模拟滚动条</title>
+<style>
+*{ margin:0; padding:0;}
+#scrollBox,#scrollBox1{ width:10px; overflow:hidden; position:absolute; right:0; top:0; background-color:#CCC; height:300px;}
+#scrollPre,#scrollNext,#scrollBar,#scrollBar1{ display:inline-block; width:10px;}
+#scrollBar,#scrollBar1{position:absolute; top:0; left:0; background-color:#333; cursor:move;}
+#scrollBox1{ height:100px;}
+#box,#box1{ width:500px; height:300px; overflow:hidden; border:1px solid #666; margin:10px auto; position:relative;}
+#content,#content1{ width:480px; position:absolute; left:0; top:0;}
+#box1{ width:300px; margin:0; height:100px;}
+#content1{ width:280px;}
+
+</style>
+<script type="text/javascript" language="javascript">
+//阻止冒泡事件
+function stopBubble(e) {
+        //如果提供了事件对象，则这是一个非IE浏览器
+        if ( e && e.stopPropagation )
+        //因此它支持W3C的stopPropagation()方法
+        e.stopPropagation();
+        else
+        //否则，我们需要使用IE的方式来取消事件冒泡
+        window.event.cancelBubble = true;
+}
+function readyScroll(box1,box2,bar){
+        //box1为内容的外框，同scrollBar的父级一样，box2为内容框，bar为拖动的模拟滚动条
+        var oBox=document.getElementById(box1);
+        var oContent=document.getElementById(box2);
+        var oScrollBar=document.getElementById(bar);
+        
+        //按百分比(内容快高度)计算scrollBar的高度
+        oScrollBar.style.height=oContent.offsetHeight<=oBox.clientHeight?oBox.clientHeight+"px":Math.ceil((1-(oContent.offsetHeight-oBox.clientHeight)/oContent.offsetHeight)*oBox.clientHeight)+"px";
+        var MaxOffsetTop=oBox.clientHeight-oScrollBar.offsetHeight;
+        move(oScrollBar,oContent,oBox);
+        
+        //给内容框一个鼠标滑轮滚动事件
+        if(document.addEventListener){
+                oBox.addEventListener('DOMMouseScroll',mildScroll,false);
+        }//W3C
+        else{oBox.onmousewheel=mildScroll;}//IE/Opera/Chrome/Safari
+        
+        function mildScroll(ev){
+                var e=ev||window.event;
+                var flags;
+                if(e.wheelDelta){//IE/Opera/Chrome
+                //alert(e.wheelDelta);//e.wheelDelta=120(向上滚动一下)--e.wheelDelta=-120(向下滚动一下)
+                        flags=e.wheelDelta==120?"up":"down";
+                }else if(e.detail){//Firefox
+                //alert(e.detail);//e.detail=3(向下滚动)--e.wheelDelta=-3(向上滚动一下)
+                        flags=e.detail==3?"down":"up";
+                };
+                stopBubble(e);
+                //alert(flags);
+                //当鼠标滑轮向上滚动的时候
+                var goTop,goConTop;
+                //alert(oBox.clientHeight-oScrollBar.offsetHeight)
+                if(flags=="down"){
+                        if(oScrollBar.offsetTop>MaxOffsetTop){
+                                goTop=MaxOffsetTop;
+                                goConTop=-(oContent.scrollHeight-oBox.clientHeight);
+                                if(document.addEventListener){
+                                        oBox.deleteEventListener('DOMMouseScroll',mildScroll,false);
+                                }//W3C
+                                else{/*oBox.detachEvent('onmousewheel',mildScroll)*//*onmousewheel=null;*/}//IE/Opera/Chrome/Safari
+                        }else{
+                                goTop=oScrollBar.offsetTop+(MaxOffsetTop*0.1);
+                                goConTop=-((oScrollBar.offsetTop*(oContent.scrollHeight-oBox.clientHeight))/(MaxOffsetTop));
+                        }
+                }else if(flags=="up"){
+                        if(oScrollBar.offsetTop<0){
+                                goTop=0;
+                                goConTop=0;
+                                if(document.addEventListener){
+                                        oBox.deleteEventListener('DOMMouseScroll',mildScroll,false);
+                                }//W3C
+                                else{/*oBox.detachEvent('onmousewheel',mildScroll)*//*onmousewheel=null;*/}//IE/Opera/Chrome/Safari
+                        }else{
+                                goTop=oScrollBar.offsetTop-(MaxOffsetTop*0.1);
+                                goConTop=-((oScrollBar.offsetTop*(oContent.scrollHeight-oBox.clientHeight))/(MaxOffsetTop));
+                        }                
+                };
+                oScrollBar.style.top=goTop+"px";
+                oContent.style.top=goConTop+"px"
+                //alert(oScrollBar.offsetTop)
+                
+        }
+};
+function move(obj,contentBox,outBox){
+        var oDiv=obj;
+        var oBox=outBox;
+        var oContent=contentBox;
+        var drag=false;
+        var oldDivL,oldDivT,oldClientX,oldClientY,oHeight,oCotentHeight;
+        
+        oDiv.onmousedown=function(ev){
+                var ev=ev||event;
+                //IE系列浏览器需要函数来触发鼠标有效域
+                if(document.all){
+                        oDiv.setCapture();
+                }
+                drag=true;
+                oldDivL=oDiv.offsetLeft;
+                oldDivT=oDiv.offsetTop;
+                //oldClientX=ev.clientX;
+                oldClientY=ev.clientY;
+                oHeight=oBox.clientHeight;
+                oCotentHeight=contentBox.scrollHeight;
+                //alert(oDiv.offsetTop/(oHeight-oDiv.offsetHeight))
+                document.onmousemove=function (ev){
+                        var ev=ev||event;
+                        if(drag==true){
+                                var actHeight,actTop;
+                                //拖动块的拖动公式定律：last_ev.clientY-old_ev.clientY=max_obj.offsetTop(或者是now.obj.offsetTop)-old_obj.offsetTop;
+                                //拖拽块：拖拽块的Top百分比=now_obj.offsetTop/max_obj.offsetTop；
+                                //内容框：内容框的Top百分比=now_obj.offsetTop/(obj.scrollHeight-oBox.clientHeight);
+                                //以上两种比例相等，由此通过拖拽块的offsetTop百分比计算内容框的Top值
+                                //当鼠标超出容器以上的时候
+                                if(ev.clientY<oldClientY-oldDivT){
+                                        actHeight=0;
+                                        actTop=0;
+                                }
+                                //当鼠标超出容器以下的时候
+                                else if(ev.clientY>oHeight-obj.offsetHeight-oldDivT+oldClientY){
+                                        actHeight=oHeight-obj.offsetHeight;
+                                        actTop=-(oCotentHeight-oHeight);
+                                }
+                                //当鼠标正常运作的时候
+                                else{
+                                        actHeight=ev.clientY-oldClientY+oldDivT;
+                                        //actTop=-(ev.clientY-oldClientY+oldDivT);
+                                        actTop=-((oDiv.offsetTop*(oCotentHeight-oHeight))/(oHeight-oDiv.offsetHeight));
+                                }
+                                oDiv.style.top=actHeight+"px";
+                                oContent.style.top=actTop+"px";
+                        };
+                }
+                document.onmouseup=function (ev){
+                        var ev=ev||event;
+                        //IE系列浏览器需要函数来解除鼠标有效
+                        if(document.all){
+                                oDiv.releaseCapture();
+                        }
+                        drag=false;
+                        document.onmousemove=null;
+                        document.onmouseup=null;
+                }
+                //return false必须有，不然火狐浏览器拖动有BUG
+                return false;                
+        }        
+}
+</script>
+</head>
+
+<body>
+<div id="box">
+        <div id="scrollBox">
+            <div style=" position:relative; width:100%; height:100%;">
+            <!--如果没有上下按钮，则直接将以下的前后两个按钮去掉-->
+            <!--<span id="scrollPre"></span>-->
+            <span id="scrollBar"></span>
+            <!--<span id="scrollNext"></span>-->
+        </div>
+    </div>
+        <div id="content">
+        <div id="box1">
+                <div id="scrollBox1">
+                    <div style=" padding:relative; width:100%; height:100%;">
+                        <span id="scrollBar1"></span>
+                </div>
+            </div>
+            <div id="content1">
+                <p>123</p>
+                <p>123</p>
+                <p>123</p>
+                <p>123</p>
+                <p>123</p>
+                <p>123</p>
+                <p>123</p>
+                <p>123</p>
+                <p>123</p>
+                <p>123</p>
+                <p>456</p>            
+            </div>
+        </div>
+        <script type="text/javascript" language="javascript">
+                readyScroll("box1","content1","scrollBar1");
+                </script>
+            <p>1</p>
+
+            <p>27</p>
+            <p>28</p>
+            <p>29</p>
+       
+            <p>36</p>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+readyScroll("box","content","scrollBar");
+</script>
+</body>
+</html>

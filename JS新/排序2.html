@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<script>
+window.onload=function()
+{
+	var oTab=document.getElementById('tab1');
+	var oBtn=document.getElementById('btn1');
+	var bAbc=true;
+	oBtn.onclick=function()
+	{
+		var arr=[];
+		var i=0;
+		for(i=0;i<oTab.tBodies[0].rows.length;i++)	
+		{
+			arr[i]=	oTab.tBodies[0].rows[i];
+		}
+		
+		arr.sort(function(tr1,tr2){
+			if(bAbc)
+			{
+				return parseInt(tr1.cells[0].innerHTML)-parseInt(tr2.cells[0].innerHTML);
+				
+
+			}
+			else
+			{
+				return parseInt(tr2.cells[0].innerHTML)-parseInt(tr1.cells[0].innerHTML)
+				
+			}
+		})
+		for(i=0; i<arr.length;i++)
+		{
+			oTab.tBodies[0].appendChild(arr[i])	
+		}
+		bAbc=!bAbc;  //取反 再赋给自己
+	/*	if(bAbc)
+		{
+			bAbc=false;	
+		}
+		else
+		{
+			 bAbc=true;	
+		}*/
+		
+	}
+	
+}
+</script>
+<body>
+<input type="button" value="排序" id="btn1" />
+<table width="400" border="1" cellpadding="0" cellspacing="1" id="tab1">
+
+  <tr>
+    <td>3</td>
+    <td>saj</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>cps</td>
+    <td>&nbsp;</td>
+  </tr>
+ 
+   <tr>
+    <td>1 </td>
+    <td>pl</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>xjd</td>
+    <td>&nbsp;</td>
+  </tr>	
+  <tr>
+    <td>4</td>
+    <td>bl</td>
+    <td>&nbsp;</td>
+  </tr>
+  
+</table>
+
+</body>
+</html>

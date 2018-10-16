@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+#div1{width:100px; height:100px; position:absolute; left:0px; top:100px; background:red}
+</style>
+<script>
+
+var timer=null;
+
+function startMove(iTarget)
+{
+	var oDiv=document.getElementById('div1');
+	clearInterval(timer)
+	timer=setInterval(function(){
+		
+		var iSpend=(iTarget-oDiv.offsetLeft)/8;
+		iSpend=iSpend>0?Math.ceil(iSpend):Math.floor(iSpend)
+		/*if(iSpend>0)
+		{
+			iSpend=Math.ceil(iSpend)
+		}
+		else
+		{
+			iSpend=Math.floor(iSpend)	
+		}*/
+		if(oDiv.offsetLeft==iTarget)
+		{
+			clearInterval(timer)	
+		}
+		else
+		{
+			oDiv.style.left=oDiv.offsetLeft+iSpend+'px';
+		}
+		txt1.value+=iSpend+'\n'
+	},30)
+	
+}
+</script>
+<body>
+<textarea rows="10"  id="txt1"	cols="40"></textarea>
+<input type="button" value="clike me" onclick="startMove(300)" />
+<div id="div1"></div>
+<div style=" background:#000; position:absolute; left:300px; top:0; width:1px; height:300px;"></div>
+</body>
+</html>

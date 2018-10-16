@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<html>
+<head>
+<script src="jquery.js"></script>
+<title>无标题文档</title>
+</head>
+<style>
+*{margin:0; padding:0}
+html,body{height:100%}
+#picBox{ visibility:hidden; position:relative; height:100%;}
+#picBox li{ position:fixed;_position:absolute; top:0; left:0; width:100%; height:100%;}
+.onLoadGif{background:url(loading.gif) center center no-repeat; position:absolute; top:0; left:0; width:100%; height:100%}
+</style>
+<body>
+<div class="onLoadGif"></div>
+<ul id="picBox">
+
+<li style=" z-index:1"><img src="http://www.visitnh.gov/library/images/fall/background-4.jpg" /></li>
+<li><img src="http://www.visitnh.gov/library/images/fall/background-5.jpg" /></li>
+<li><img src="http://www.visitnh.gov/library/images/fall/background-6.jpg" /></li>
+
+</ul>
+<script>
+var imgNum=$('#picBox img').length;
+var iNow=1;
+var zIndex=2;
+
+$('#picBox img').load(function(){
+	
+    if(!--imgNum){
+		$('.onLoadGif').hide();
+		var picWidth=$('#picBox li').eq(0).width();
+		var picHeight=$('#picBox li').eq(0).height();
+		$('#picBox img').each(function(i,obj){
+			$('#picBox img').eq(i).css({'width':picWidth,'height':picHeight})
+		})
+
+		
+		$('#picBox').css('visibility','visible');
+		setInterval("startShow()",4000)
+	}
+})
+function startShow(){
+	zIndex++;
+	if(iNow==$('#picBox img').size()){
+		iNow=0;	
+	}
+	$('#picBox li').eq(iNow).css('z-index',zIndex).hide().fadeIn(800)
+	iNow++;
+}
+</script>
+</body>
+</html>

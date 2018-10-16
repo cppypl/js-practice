@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+*{margin:0; padding:0}
+#div1{position:absolute; bottom:0; text-align:center; width:100%;}
+</style>
+<script>
+document.onmousemove=function(ev)
+{
+	var oEvent=event || ev;
+	var oDiv=document.getElementById('div1');	
+	var aImg=document.getElementsByTagName('img');
+	var aTxt=document.getElementsByTagName('input');
+	var i=0;
+
+	for(i=0; i<aImg.length; i++)
+	{
+		var x=aImg[i].offsetLeft+aImg[i].offsetWidth/2;  //图片中心点距离左边的距离
+		var y=aImg[i].offsetTop+oDiv.offsetTop+aImg[i].offsetHeight/2;//图片中心点距离上边的距离
+			
+			
+		var a=x-oEvent.clientX;
+		var b=y-oEvent.clientY;
+		
+		var juli=Math.sqrt(a*a+b*b);//开平方根
+	
+		
+		var bili=1-juli/200;
+		if(bili<0.5)
+		{
+			bili=0.5	
+		}
+		aImg[i].style.width=bili*128+'px';
+			aTxt[i].value=bili.toFixed(3);
+	}
+}
+</script>
+<body>
+<input type="text" />
+<input type="text" />
+<input type="text" />
+<input type="text" />
+<input type="text" />
+<div id="div1">
+<img src="images/1.png" width="64"  />
+<img src="images/2.png" width="64"  />
+<img src="images/3.png" width="64"  />
+<img src="images/4.png" width="64"  />
+<img src="images/5.png" width="64"  />
+</div>
+</body>
+</html>

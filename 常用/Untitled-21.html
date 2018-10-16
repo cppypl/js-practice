@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<script src="move.js"></script>
+<script>
+window.onscroll=function(ev){
+	var oDiv=document.getElementById('div1');
+	var oEv=ev||event;
+	var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+
+	if(scrollTop>=300){
+		oDiv.style.display='block';	
+		startMove(oDiv,{top:scrollTop+100,left:1500,opacity:100});
+	}else{
+		startMove(oDiv,{top:scrollTop+100,left:800,opacity:0},function(){
+			oDiv.style.display='none'	
+		});	
+	}
+}
+</script>
+<body style="height:3000px">
+<div id="div1" style=" width:100; height:200px; background:red; position:absolute; left:800px; top:100px">啊啊啊</div>
+</body>
+</html>

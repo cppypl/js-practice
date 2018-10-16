@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="move.js"></script>
+
+<script>
+window.onload=function(){
+	var oUl=document.getElementById('ul');	
+	var oDiv=document.getElementById('div');	
+	var aLi=oUl.getElementsByTagName('li');
+	var aBtn=document.getElementsByTagName('input');
+	oUl.style.width=aLi.length*(aLi[0].offsetWidth+10)+'px';
+	
+	aBtn[0].onclick=function(){
+		startMove(oUl,{left:oUl.offsetLeft-(aLi[0].offsetWidth+10)})
+		//oUl.style.left=+'px';
+	}
+}
+</script>
+<style>
+*{ margin:0; padding:0}
+#div{width:440px; height:110px; background:#eee; margin:20px; position:relative; border:1px #ccc solid; overflow:hidden}
+#ul{position:absolute; left:0; top:5px}
+#ul li{width:100px; height:100px; background:red; float:left; list-style:none; margin:0 5px;}
+</style>
+</head>
+
+<body>
+
+<div id="div">
+    <ul id="ul">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+</div>
+<input type="button" value="左" />
+<input type="button" value="右" />
+</body>
+</html>

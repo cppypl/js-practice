@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+#div1{width:100px; height:100px; background:red;}
+</style>
+<script>
+function myAddEvent(obj,sEvent,fn)
+{
+	if(obj.attachEvent)
+	{
+		obj.attachEvent('on'+sEvent,fn);	
+	}
+	else
+	{
+		obj.addEventListener(sEvent,fn,false);	
+	}
+}
+
+window.onload=function()
+{
+	var oDiv=document.getElementById('div1');
+	function wheel(ev)
+	{
+		var oEvent=ev||event;
+		var bDown=true;
+		bDown=oEvent.detail?oEvent.detail>0:oEvent.wheelDelta<0;
+		alert(bDown)	
+		if(oEvent.preventDefault)
+		{
+			oEvent.preventDefault();
+		}
+		return false;
+	}	
+	
+	myAddEvent(oDiv,'mousewheel',wheel)
+	myAddEvent(oDiv,'DOMMouseScroll',wheel)
+}
+</script>
+<body style="height:2000px">
+<div id="div1"></div>
+</body>
+</html>

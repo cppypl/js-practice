@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+*{ margin:0; padding:0}
+#ul1{border:1px #999 solid; position:relative;  margin:50px auto; width:612px; height:40px; border-right:0}
+#ul1 li{width:100px; height:40px; line-height:40px; border-right:1px #000 solid; border-left:1px #fff solid; text-shadow:1px 1px 1px #fff; font-family:微软雅黑; background:#ccc; float:left; text-align:center; font-size:14px; list-style:none }
+#ul1 #bg{ position:absolute; bottom:0; left:0; border:none; background:#0099ff;  opacity:0.5; filter:alpha(opacity:50); z-index:1;}
+</style>
+<script>
+
+window.onload=function()
+{
+	var oUl=document.getElementById('ul1');	
+	var aLi=oUl.getElementsByTagName('li');
+	var oBg=document.getElementById('bg');
+	
+	for(var i=0; i<aLi.length-1;i++)
+	{
+		aLi[i].onmouseover=function()
+		{
+			startMove(oBg,this.offsetLeft)
+		}	
+	}
+	
+
+}
+var iSpeed=0;
+var Left=0;
+function startMove(obj,iTarget)
+{
+	clearInterval(obj.timer)
+	obj.timer=setInterval(function(){
+		iSpeed+=(iTarget-obj.offsetLeft)/5;
+		iSpeed*=0.7;
+		Left+=iSpeed;
+		
+		if(Math.abs(iSpeed)<1 && Math.abs(Left-iTarget)<1)
+		{
+			clearInterval(obj.timer)
+			obj.style.left=iTarget+'px';
+		
+		}
+		else
+		{
+			obj.style.left=Left+'px'
+		}
+		
+		},30)
+}
+</script>
+<body>
+	<ul id="ul1">
+    	<li style="border-left:0">首页</li>
+    	<li>首页</li>
+    	<li>首页</li>
+    	<li>首页</li>
+    	<li>首页</li>
+    	<li>首页</li>
+    	<li id="bg"></li>
+    </ul>
+</body>
+</html>

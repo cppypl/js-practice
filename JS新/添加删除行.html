@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<script>
+window.onload=function()
+{
+	var oTab=document.getElementById('tab1');
+	var oldBgColor='';	
+	var oTxt=document.getElementById('txt1');
+	var oBtn=document.getElementById('btn1');
+	oBtn.onclick=function()
+	{
+		var oTr=document.createElement('tr');
+		var oTd=null;
+		
+		oTd=document.createElement('td');
+		oTd.innerHTML=oTab.tBodies[0].rows.length+1;
+		oTr.appendChild(oTd);
+		
+		oTd=document.createElement('td');
+		oTd.innerHTML=oTxt.value;
+		oTr.appendChild(oTd);
+		
+		oTd=document.createElement('td');
+		oTd.innerHTML='<a href="javascript:">删除</a>'
+		oTr.appendChild(oTd);
+		
+		oTd.getElementsByTagName('a')[0].onclick=function()
+		{
+			oTab.tBodies[0].removeChild(this.parentNode.parentNode)
+		}
+		
+		oTab.tBodies[0].appendChild(oTr)
+	}
+	for(var i=0; i<oTab.tBodies[0].rows.length;i++)
+	{
+		oTab.tBodies[0].rows[i].style.background=i%2?'#ccc':'';
+		oTab.tBodies[0].rows[i].index=i;
+		oTab.tBodies[0].rows[i].onmouseover=function()
+		{
+			oldBgColor=this.style.background;
+			this.style.background='#0099ff'	
+		}
+		oTab.tBodies[0].rows[i].onmouseout=function()
+		{
+			this.style.background=oldBgColor;
+		}
+	}
+	
+	
+}
+</script>
+<body>
+<input type="text" id="txt1" /><input type="button" value="添加" id="btn1" />
+<table width="400" border="1" cellpadding="0" cellspacing="1" id="tab1">
+
+  <tr>
+    <td>1 </td>
+    <td>pl</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>cps</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>saj</td>
+    <td>&nbsp;</td>
+  </tr><tr>
+    <td>4</td>
+    <td>bl</td>
+    <td>&nbsp;</td>
+  </tr><tr>
+    <td>5</td>
+    <td>xjd</td>
+    <td><a href="javascript:">删除</a>;</td>
+  </tr>	
+  
+</table>
+
+</body>
+</html>

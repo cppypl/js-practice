@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+*{margin:0; padding:0}
+#bbox{background:#000; position:absolute; top:40%; left:0; height:340px; width:100%; overflow:hidden;}
+#box{ position:absolute; top:10px; left:0; }
+img{ display:block; float:left; margin:0 5px}
+</style>
+<script>
+window.onload=function(){
+	var oBbox=document.getElementById('bbox');
+	var oBox=document.getElementById('box');
+	var aImg=oBox.getElementsByTagName('img');
+	oBox.style.width=aImg.length*(aImg[0].offsetWidth+10)+80+'px';
+	oBbox.onmousemove=function(ev){
+		var oEvent=ev||event;
+		
+		var bili=oEvent.clientX/document.body.clientWidth;
+		
+		oBox.style.left=-(oBox.offsetWidth/2+(oBox.offsetWidth/2-document.body.clientWidth)+80)*bili+'px';
+	}
+}
+</script>
+<body>
+<div id="bbox">
+    <div id="box">
+    	<img src="../1330995000660609.jpg" style="margin-left:80px" />
+        <img src="../1330995000660609.jpg" />
+        <img src="../1330995000660609.jpg" />
+        <img src="../1330995000660609.jpg" />
+        <img src="../1330995000660609.jpg" />
+        <img src="../1330995000660609.jpg" />
+        <img src="../1330995000660609.jpg" />
+        <img src="../1330995000660609.jpg" />
+        <img src="../1330995000660609.jpg" />
+        <img src="../1330995000660609.jpg" />
+        <img src="../1330995000660609.jpg" />
+        <img src="../1330995000660609.jpg" />
+        <img src="../1330995000660609.jpg" />
+        <img src="../1330995000660609.jpg" />
+        <img src="../1330995000660609.jpg" />
+        <img src="../1330995000660609.jpg" />
+        <img src="../1330995000660609.jpg" />
+        <img src="../1330995000660609.jpg" />
+        <img src="../1330995000660609.jpg" />
+    </div>
+</div>
+</body>
+</html>

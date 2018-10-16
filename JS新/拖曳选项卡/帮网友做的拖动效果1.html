@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link type="text/css" href="css/commom.css"  rel="stylesheet"/>
+<style type="text/css">
+.big{ width:980px; margin:20px auto; height:52px; background:url(img/sprite-our-expertise.png) no-repeat 0 -360px transparent; position:relative; }
+.big .bg{background:url(img/sprite-our-expertise.png) no-repeat 0 -412px transparent; height:52px; width:960px; padding:0 10px;}
+.big li{ float:left; display:inline-block; width:192px; height:52px;}
+.big li a{ opacity:0.5; filter:alpha(opacity=50); display:block; width:192px; height:52px; background:#000;}
+.big li a:hover{ opacity:0; filter:alpha(opacity=0); display:block; width:192px; height:52px; background:#000;}
+.cur{ margin-left:26px; width:165px; height:44px; position:absolute; top:6px; left:0px; background:url(img/sprite-our-expertise.png) no-repeat 0 -481px;}
+.cur a{ display:block; height:44px; width:165px;}
+.cur a:hover{background:url(img/sprite-our-expertise.png) no-repeat -203px -481px transparent;}
+#content{ width:980px; height:200px; margin:0 auto; position:relative;}
+#content .con1{ width:980px; height:200px; margin:0 auto; position:absolute; top:0; left:0; z-index:2; background-color:#F00;}
+#content .con2{ width:980px; height:200px; margin:0 auto; position:absolute; top:0; left:0; z-index:1; background-color:#Ff0;}
+#content .con3{ width:980px; height:200px; margin:0 auto; position:absolute; top:0; left:0; z-index:1; background-color:#F0f;}
+#content .con4{ width:980px; height:200px; margin:0 auto; position:absolute; top:0; left:0; z-index:1; background-color:#00f;}
+#content .con5{ width:980px; height:200px; margin:0 auto; position:absolute; top:0; left:0; z-index:1; background-color:#0ff;}
+</style>
+<script type="text/javascript" src="js/perfectMove.js"></script>
+
+<script type="text/javascript">
+window.onload=function(){
+	var oStep=document.getElementById("step");
+	var oCur=document.getElementById("cur");
+	var oLi=oStep.getElementsByTagName("li");
+	var oBig=document.getElementById("big");
+	var oCon=document.getElementById("con");
+	var oContent=document.getElementById("content");
+	var oCot=oContent.getElementsByTagName("div");
+	var leftA;
+	var timer;
+	var zIndex=2;
+	for(var i=0;i<oLi.length;i++)
+	{
+		oLi[i].index=i;
+		oLi[i].onclick=function(){
+			var left=this.index*192;
+			if(this.className=="current")
+			{
+				return ;
+			}else{
+				for(var j=0; j<oLi.length;j++)
+				{
+					oLi[j].className="";
+				}
+				oLi[this.index].className="current";
+				showMove(oCur,{left:left});
+				oCot[this.index].style.zIndex=zIndex++;
+				oCot[this.index].style.opacity=0.5;
+				oCot[this.index].style.filter="alpha(opacity=50)";
+				showMove(oCot[this.index],{opacity:100});
+			}
+			
+		}	
+	}
+	/** 拖曳 begin**/
+	oCur.onmousedown=function(e){
+		var oEvent=e||event;
+		var posX=oEvent.clientX-oBig.offsetLeft-this.offsetLeft;
+		
+		oCur.onmousemove=function(e){
+			var oEvent1=e||event;
+			var l=oEvent1.clientX-posX-26-oBig.offsetLeft;
+			if(l<0)
+			{
+				l=0;
+			}else if(l>768){
+				l=768;
+			}
+			oCur.style.left=l+"px";
+		}
+		
+	}
+	oCur.onmouseup=document.onmouseup=oCur.onmouseout=function(){
+		oCur.onmousemove=null;
+		var leftUp=parseInt(getStyle(oCur,"left"));
+		
+		if(leftUp<96&&leftUp>=0){
+			leftUp=0;
+		}else if(leftUp>=96&&leftUp<288){
+			leftUp=192;
+		}else if(leftUp>=288&&leftUp<480){
+			leftUp=384;
+		}else if(leftUp>=480&&leftUp<672){
+			leftUp=576;
+		}else{
+			leftUp=768;
+		}
+		var conIndex=leftUp/192;
+		showMove(oCur,{left:leftUp});
+		if(oLi[conIndex].className=="current")
+		{
+			return ;
+		}else{
+			for(var j=0; j<oLi.length;j++)
+			{
+				oLi[j].className="";
+			}
+			oLi[conIndex].className="current";
+			oCot[conIndex].style.zIndex=zIndex++;
+			oCot[conIndex].style.opacity=0.5;
+			oCot[conIndex].style.filter="alpha(opacity=50)";
+			showMove(oCot[conIndex],{opacity:100});
+		}
+		
+	}
+	
+}
+</script>
+</head>
+
+<body>
+	<div class="big" id="big">
+    	<div class="bg" id="step">
+        	<ul class="clearfix">
+            	<li class="current">
+                	<a href="#"></a>
+                </li>
+                <li>
+                	<a href="#"></a>
+                </li>
+                <li>
+                	<a href="#"></a>
+                </li>
+                <li>
+                	<a href="#"></a>
+                </li>
+                <li>
+                	<a href="#"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="cur" id="cur" >
+        </div>
+    </div>
+    <div id="content">
+    	<div class="con1">内容一</div>
+        <div class="con2">内容二</div>
+        <div class="con3">内容三</div>
+        <div class="con4">内容四</div>
+        <div class="con5">内容五</div>
+    </div>
+</body>
+</html>

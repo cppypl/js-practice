@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<script src="move.js"></script>
+<style>
+#r{position:fixed; right:10px; top:30px; background:red}
+#dh1{width:960px; margin:10px auto; height:800px; background:#ccc;}
+#dh2{width:960px; margin:10px auto; height:800px; background:#09f;}
+#dh3{width:960px; margin:10px auto; height:800px; background:red;}
+</style>
+<script>
+window.onload=function(){
+
+	
+	var aA=document.getElementsByTagName('b');
+	for(var i=0; i<aA.length;i++){
+		aA[i].onclick=function(){
+			var iD=this.getAttribute('go');
+			var oDiv=document.getElementById(iD);
+			
+			
+			function show()
+			{
+				
+				var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+				
+
+				if(scrollTop==oDiv.offsetTop)
+				{
+					clearInterval(timer)	
+				}
+				bSys=true;
+				if(scrollTop>oDiv.offsetTop){
+					var iSpend=Math.floor(-scrollTop/8);
+				}else{
+					var iSpend=Math.floor(scrollTop/8);
+				}
+				
+				document.body.scrollTop=document.documentElement.scrollTop=scrollTop+iSpend;	
+				
+			}
+			timer=setInterval(show,30)
+
+			//document.body.scrollTop=document.documentElement.scrollTop=oDiv.offsetTop
+			//startMove(scrollTop,{scrollTop:oDiv.offsetTop})
+		}	
+	}
+	
+}
+window.onscroll=function(){
+	var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+	//alert(scrollTop)
+}
+</script>
+<body>
+<div id="r"><b go="dh1" >电器</b><b go="dh2" >电器</b><b go="dh3" >电器</b></div>
+<div id="dh1"></div>
+<div id="dh2"></div>
+<div id="dh3"></div>
+</body>
+</html>
