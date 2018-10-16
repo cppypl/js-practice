@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+*{margin:0; padding:0}
+ul{width:300px; margin:0 auto; border:1px #999 solid; background:#ccc; padding:20px;}
+ul li{list-style:none; border-bottom:1px #999 dashed; height:30px; line-height:30px; overflow:hidden; position:relative; cursor:pointer}
+ul li .box{height:60px; position:absolute; z-index:1; }
+p{position:absolute; left:0; top:0; height:30px; background:#fff; width:100%; opacity:0; filter:alpha(opacity:0); z-index:0}
+</style>
+<script src="淡入淡出焦点图/move2.js"></script>
+<script>
+function getByClass(oParent,sClass)
+{
+	var aEle=document.getElementsByTagName('*');	
+	var aResult=[];
+	for(var i=0; i<aEle.length;i++)
+	{
+		if(aEle[i].className==sClass)
+		{
+			aResult.push(aEle[i])
+		}	
+	}
+	return aResult;
+}
+window.onload=function()
+{
+	
+	var oUl=document.getElementsByTagName('ul')[0];
+	var aLi=oUl.getElementsByTagName('li');
+	var aBox=getByClass(oUl,'box');
+
+	for(var i=0;i<aLi.length;i++)
+	{
+		
+		aLi[i].onmouseover=function()
+		{	
+		
+			var oP=this.getElementsByTagName('p')[0];	
+		
+			oP.style.opacity=1;
+			oP.style.filter='alpha(opacity:100)';
+			
+		}	
+		
+		aLi[i].onmouseout=function()
+		{	
+		
+			var oP=this.getElementsByTagName('p')[0];	
+		
+			startMove(oP,{opacity:0})
+			
+		}	
+	}
+	
+}
+</script>
+<body>
+<ul>
+
+	<li><p></p><div class="box"><div>aaaaaaaaaaa</div><div>bbbbbbbbbbbbbb</div></div></li>
+    <li><p></p><div class="box"><div>aaaaaaaaaaa</div><div>bbbbbbbbbbbbbb</div></div></li>
+    <li><p></p><div class="box"><div>aaaaaaaaaaa</div><div>bbbbbbbbbbbbbb</div></div></li>
+    <li><p></p><div class="box"><div>aaaaaaaaaaa</div><div>bbbbbbbbbbbbbb</div></div></li>
+    <li><p></p><div class="box"><div>aaaaaaaaaaa</div><div>bbbbbbbbbbbbbb</div></div></li>
+    <li><p></p><div class="box"><div>aaaaaaaaaaa</div><div>bbbbbbbbbbbbbb</div></div></li>
+    <li><p></p><div class="box"><div>aaaaaaaaaaa</div><div>bbbbbbbbbbbbbb</div></div></li>
+    <li><p></p><div class="box"><div>aaaaaaaaaaa</div><div>bbbbbbbbbbbbbb</div></div></li>
+    
+</ul>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>About</title>
+<style>
+*{margin:0;padding:0;}
+body{margin:0;padding:0;}
+ul{margin:0;padding:0;list-style-type:none;}
+.product-img{width:218px;margin:100px 0 0 100px;padding:10px;border:1px solid #000;}
+.product-img-hd{width:216px;margin:0 auto 5px;border:1px solid #000;}
+.product-img-ul{position:relative;width:216px;margin:0 auto;border:0px solid #000;}
+
+.product-img-ul ul{height:60px;border:0px solid #000; position:absolute; left:0;}
+.product-img-ul ul li{float:left;width:76px;height:56px;overflow:hidden;margin-left:5px;border:1px solid #f00;}
+.product-img-sl{position:absolute;top:0;left:0;width:20px;border:1px solid #000;}
+.product-img-sr{position:absolute;top:0;right:0;width:20px;border:1px solid #000;}
+.product-img-sl a,.product-img-sr a{display:block;width:18px;height:56px;overflow:hidden;}
+
+/* CSS clearfix */
+.clearfix:after {content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix {display:inline-block;}
+* html .clearfix {height:1%;}
+.clearfix {display:block;}
+
+.product-center{width:168px;height:60px;margin-left:22px;border:0px solid #000; position:relative; overflow:hidden}
+</style>
+<script type="text/javascript" src="tab.js"></script>
+</head>
+<body>
+
+<div class="product-img" id="product-img">
+	<div class="product-img-hd" id="bigul"><img src="Akali_Splash_0.jpg" alt="" width="216" height="206" /></div>
+	<div class="product-img-ul clearfix">
+		<div class="product-img-sl" id="left"><a href="#">L</a></div>
+		<div class="product-center">
+        	<ul class="clearfix" id="smallul">
+                <li><img src="Akali_Splash_0.jpg" alt="" width="76" height="56" /></li>
+                <li><img src="Akali_Splash_1.jpg" alt="" width="76" height="56" /></li>
+                <li><img src="Akali_Splash_2.jpg" alt="" width="76" height="56" /></li>
+                <li><img src="Akali_Splash_3.jpg" alt="" width="76" height="56" /></li>
+               
+			</ul>
+        </div>
+		<div class="product-img-sr" id="right"><a href="#">R</a></div>
+	</div><!-- end product-img-ul -->
+</div>
+
+</body>
+</html>

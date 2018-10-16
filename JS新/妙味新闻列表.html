@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+ <style>
+ *{margin:0; padding:0}
+ li{list-style:none;}
+ #ul1,#ul2{width:400px; margin:20px; float:left; border:1px #000 solid}
+ li{width:100%; height:30px; overflow:hidden; position:relative; line-height:30px; border-bottom:1px #000 dashed}
+ div{position:absolute; top:0; left:0;}
+ </style>
+
+<body>
+<ul id="ul1">
+	<li>
+    	<div>
+        	<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        	<p>bbbbbbbbbbbbbbbbbbbbbbbbbbb</p>
+        </div>
+    </li>
+    <li>
+    	<div>
+        	<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        	<p>bbbbbbbbbbbbbbbbbbbbbbbbbbb</p>
+        </div>
+    </li>
+    <li>
+    	<div>
+        	<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        	<p>bbbbbbbbbbbbbbbbbbbbbbbbbbb</p>
+        </div>
+    </li>
+    <li>
+    	<div>
+        	<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        	<p>bbbbbbbbbbbbbbbbbbbbbbbbbbb</p>
+        </div>
+    </li>
+    <li>
+    	<div>
+        	<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        	<p>bbbbbbbbbbbbbbbbbbbbbbbbbbb</p>
+        </div>
+    </li>
+    <li>
+    	<div>
+        	<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        	<p>bbbbbbbbbbbbbbbbbbbbbbbbbbb</p>
+        </div>
+    </li>
+    <li>
+    	<div>
+        	<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        	<p>bbbbbbbbbbbbbbbbbbbbbbbbbbb</p>
+        </div>
+    </li>
+
+</ul><ul id="ul2">
+	<li>
+    	<div>
+        	<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        	<p>bbbbbbbbbbbbbbbbbbbbbbbbbbb</p>
+        </div>
+    </li>
+    <li>
+    	<div>
+        	<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        	<p>bbbbbbbbbbbbbbbbbbbbbbbbbbb</p>
+        </div>
+    </li>
+    <li>
+    	<div>
+        	<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        	<p>bbbbbbbbbbbbbbbbbbbbbbbbbbb</p>
+        </div>
+    </li>
+    <li>
+    	<div>
+        	<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        	<p>bbbbbbbbbbbbbbbbbbbbbbbbbbb</p>
+        </div>
+    </li>
+    <li>
+    	<div>
+        	<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        	<p>bbbbbbbbbbbbbbbbbbbbbbbbbbb</p>
+        </div>
+    </li>
+    <li>
+    	<div>
+        	<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        	<p>bbbbbbbbbbbbbbbbbbbbbbbbbbb</p>
+        </div>
+    </li>
+    <li>
+    	<div>
+        	<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        	<p>bbbbbbbbbbbbbbbbbbbbbbbbbbb</p>
+        </div>
+    </li>
+
+</ul>
+
+<script>
+
+
+function toShow(obj)
+	{
+		var oUl1=document.getElementById(obj);	
+		var aDiv=oUl1.getElementsByTagName('div');	
+		var iNow=0;
+		var timer=null;
+		var bDom=true;
+		
+		setInterval(function(){toChange()},4000)
+		function toChange()
+		{
+			timer=setTimeout(function (){
+				if(iNow==aDiv.length)
+				{
+					clearInterval(timer);
+					iNow=0;
+					bDom=!bDom;
+					return;
+					
+				}
+				else
+				{
+					if(bDom)
+					{
+						startMove(aDiv[iNow],{top:-30});
+						iNow++;
+					}
+					else
+					{
+						startMove(aDiv[iNow],{top:0});
+						iNow++;
+					}
+					toChange();
+					
+				}
+			
+			
+			},100);
+		}
+		
+		
+	}
+window.onload=function(){
+
+	toShow('ul1');	
+	setTimeout(function(){toShow('ul2')},2000);
+	window.onblur=function(){
+		clearInterval(timer);
+	}
+}
+
+ function getStyle(obj,attr)
+{
+	if(obj.currentStyle)//如果是IE（IE只认识currentStyle）
+	{
+		return obj.currentStyle[attr];	
+	}else//如果是FF（FF只认识getComputedStyle）
+	{
+		return getComputedStyle(obj,false)[attr]	
+	}
+}
+function startMove(obj,json,fn)
+{
+	clearInterval(obj.timer)
+	obj.timer=setInterval(function(){
+		var bStop=true;
+		for(attr in json)
+		{
+			//1、取当前的值
+			if(attr=='opacity')
+			{
+				var iCur=parseInt(parseFloat(getStyle(obj,attr))*100);
+			}
+			else
+			{
+				var iCur=parseInt(getStyle(obj,attr));
+			}
+			//2、算速度
+			var iSpend=(json[attr]-iCur)/8;	
+			iSpend=iSpend>0?Math.ceil(iSpend):Math.floor(iSpend);
+			//3、检查停止与否	
+			if(iCur!=json[attr])
+			{
+				bStop=false;	
+			}
+				if(attr=='opacity')
+				{
+					obj.style.filter='alpha(opacity='+(iCur+iSpend)+')';
+					obj.style.opacity=(iCur+iSpend)/100;
+				}
+				else
+				{
+					obj.style[attr]=iCur+iSpend+'px';
+				}
+		}
+		if(bStop)
+		{
+			clearInterval(obj.timer)	
+				if(fn)
+				{
+					fn();
+				}		
+		}
+	},30);
+}
+ </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+li{width:100px;height:100px; background:#666; border:1px #999 solid; margin:5px; list-style:none; float:left; line-height:100px; text-align:center; font-size:28px; color:#fff}
+.active{background:#0099ff}
+#txt1{width:763px; height:100px; background:#333; border:1px #666 solid; color:#fff; margin-left:44px; padding-left:10px}
+</style>
+<script>
+window.onload=function(){
+	var oLi=document.getElementsByTagName('li');
+	var oTxt=document.getElementById('txt1');
+	var oDatas=['第一个月，工作','第二个月,上班','第三个月.....','第四个月.....','第五个月.....','第六个月.....','第七个月.....']
+	
+	for(i=0;i<oLi.length;i++)
+	{
+		oLi[i].index=i;
+		oLi[i].onmouseover=function(){
+			
+			for(i=0;i<oLi.length;i++)
+			{
+				oLi[i].className=''
+			}	
+			this.className='active';
+			oTxt.innerHTML='<h3>第'+(this.index+1)+'月活动安排</h3><p>'+oDatas[this.index]+'</p>'
+		}
+	}
+}
+</script>
+<body>
+
+<ul>
+	<li class="active">1</li>
+	<li>2</li>
+	<li>3</li>
+	<li>4</li>
+	<li>5</li>
+	<li>6</li>
+	<li>7</li>
+</ul>
+<div style="clear:both"></div>
+<div id="txt1">
+	<h3>第1月活动安排</h3>
+    <P>第一个月，工作</P>
+</div>
+</body>
+</html>

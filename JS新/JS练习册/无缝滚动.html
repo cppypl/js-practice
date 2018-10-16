@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+*{margin:0; padding:0}
+#left{float:left; width:100px; height:100px; font-size:36px; font-weight:bold; line-height:100px; text-align:center}
+#right{float:left; width:100px; height:100px; font-size:36px; font-weight:bold; line-height:100px; text-align:center}
+#box{width:800px; margin:20px auto; height:110px;  overflow:hidden; position:relative; float:left}
+#box ul{position:absolute; width:4444px; left:0;}
+#box li{width:100px; height:100px; float:left; margin-right:10px; border:1px #666 solid; background:#ccc; list-style:none;}
+</style>
+<script>
+window.onload=function(){
+	var oUl=document.getElementById('box1');
+	var aLi=oUl.getElementsByTagName('li');
+	var oLeft=document.getElementById('left');
+	var oRight=document.getElementById('right');
+	oUl.innerHTML+=oUl.innerHTML;
+	wid=aLi.length*110;
+	var timer=null;
+	var iSpend=2
+	function show()
+	{
+		oUl.style.left=oUl.offsetLeft-iSpend+'px';
+		if(oUl.offsetLeft<-wid/2)
+		{
+			oUl.style.left=0	
+		}else if(oUl.offsetLeft>0)
+		{
+			oUl.style.left=-wid/2+'px';
+		}
+	}	 
+	timer=setInterval(show,20)
+	oLeft.onclick=function()
+	{
+		iSpend=2
+	}
+	oRight.onclick=function()
+	{
+		iSpend=-2
+	}
+	for(var i=0;i<aLi.length;i++)
+	{
+		aLi[i].index=i;
+		
+		aLi[i].onmouseover=function()
+		{
+			aLi[this.index].style.marginTop=2+'px';
+			aLi[this.index].style.marginLeft=1+'px';
+			aLi[this.index].style.background='#9999ff';
+			clearInterval(timer)
+		}
+		aLi[i].onmouseout=function()
+		{
+			aLi[this.index].style.background='';
+			aLi[this.index].style.marginTop='';
+			aLi[this.index].style.marginLeft='';
+			timer=setInterval(show,20)
+		}
+	}
+	
+}
+
+</script>
+<body>
+<div id="left">←</div>
+<div id="box">
+	<ul id="box1">
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    </ul>
+	
+</div>
+<div id="right">→</div>
+
+</body>
+</html>

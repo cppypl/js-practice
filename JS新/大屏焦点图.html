@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+
+<style>
+*{margin:0; padding:0}
+li{list-style:none}
+#box{width:100%; height:600px; position:relative; overflow:hidden}
+#box ul{position:absolute; width:303%;+width:304%; top:100%; top:0; left:0;}
+#box li {width:1920px; height:600px; float:left;}
+
+#box2{width:1024px; margin:0 auto; height:60px; text-align:center}
+#box2 ul{width:330px; margin:20px auto}
+#box2 li {width:100px; height:60px; float:left; margin-right:10px; cursor:pointer;}
+
+#left{background:#333; color:#fff; font-size:36px; font-weight:bold; float:left; height:60px; width:60px; line-height:60px; cursor:pointer}
+#right{background:#333; color:#fff; font-size:36px; font-weight:bold; float:left; height:60px; width:60px; line-height:60px; cursor:pointer }
+
+</style>
+<script src="move.js"></script>
+<script type="text/javascript">
+window.onload=function(){
+	var oDiv=document.getElementById('box');
+	var oDiv1=document.getElementById('box2');
+	var aLi1=oDiv.getElementsByTagName('li');
+	var oUl=oDiv.getElementsByTagName('ul')[0];
+	var aLi2=document.getElementById('box2').getElementsByTagName('li');
+	
+	var oLeft=document.getElementById('left');
+	var oRight=document.getElementById('right');
+	
+	var iNow=0;
+	for(var i=0; i<aLi2.length;i++){
+		aLi2[i].index=i;
+		
+		aLi2[i].onclick=function(){
+			iNow=this.index;
+			showpic();
+		}
+	}
+	oLeft.onclick=function(){
+		
+		iNow--;	
+		if(iNow<0){
+			iNow=2;	
+		}
+		showpic()
+	}
+	oRight.onclick=function(){
+		
+		iNow++;	
+		if(iNow==3){
+			iNow=0;	
+		}
+		showpic()
+	}
+	function biginshow(){
+		timer=setInterval(function(){
+			iNow++;
+			if(iNow>2){
+				iNow=0	
+			}
+			showpic();	
+		},5000)
+	}
+	biginshow();
+	oDiv1.onmouseover=oDiv.onmouseover=function(){
+		clearInterval(timer)
+	}
+	oDiv1.onmouseout=oDiv.onmouseout=function(){
+		biginshow();
+	}
+	function showpic(){
+		startMove(oUl,{left:-1920*iNow});
+	}
+
+}
+</script>
+
+</head>
+<body>
+<div id="box">
+	<ul>
+    	<li style="background:#F30"></li>
+    	<li style="background:#0099ff"></li>
+    	<li style="background:#ccc"></li>
+    </ul>
+</div>
+<div id="box2">
+	<div id="left"><</div>
+	<ul>
+    	<li style="background:#F30"></li>
+    	<li style="background:#0099ff"></li>
+    	<li style="background:#ccc"></li>
+    </ul>
+    <div id="right">></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+#c1{background:#fff}
+body{background:#000}
+</style>
+
+<script>
+window.onload=function(){
+	var oCanvas=document.getElementById('c1');	
+	var oGc=oCanvas.getContext('2d');
+	
+	oGc.save();//储存，相当于function()
+	oGc.fillStyle='red';
+	oGc.beginPath();//开始绘制
+	oGc.moveTo(100,100);//第一个点
+	
+	oGc.lineTo(200,200);//第二个
+	oGc.lineTo(300,200);//第三个
+	oGc.closePath();//闭合开始的点和末尾的点
+	oGc.fill();//填充图形
+	oGc.restore();//结束储存
+	
+	//----------------------
+	oGc.beginPath();
+	oGc.moveTo(100,200);
+	
+	oGc.lineTo(200,300);
+	oGc.lineTo(300,300);
+	oGc.closePath();
+	oGc.fill();
+//	oGc.clearRect(0,0,oCanvas.width,oCanvas.height) //清除画布
+}
+</script>
+<body>
+<canvas id="c1" width="400" height="400">您的浏览器不支持</canvas>
+</body>
+</html>

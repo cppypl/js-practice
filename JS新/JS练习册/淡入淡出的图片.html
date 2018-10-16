@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+#img1{filter(alpha=opacity:30); opacity:0.3;}
+</style>
+<script>
+
+window.onload=function(){
+	var oImg=document.getElementById('img1');
+	oImg.onmouseover=function(){
+		startMove(100)	
+	}	
+	oImg.onmouseout=function(){
+		startMove(30)	
+	}
+}
+var timer=null;
+var alpha=30;
+function startMove(iTarget)
+{
+	var oImg=document.getElementById('img1');
+	clearInterval(timer);
+	
+	timer=setInterval(function(){
+			if(alpha<iTarget)
+			{
+				iSpend=10;
+			}else
+			{
+				iSpend=-10;	
+			}
+			if(alpha==iTarget)
+			{
+				clearInterval(timer)
+			}else
+			{
+				alpha+=iSpend;
+				oImg.style.filter='alpha(opacity:'+alpha+')'
+				oImg.style.opacity=alpha/100;
+			}
+		},30)	
+}
+</script>
+<body>
+<img src="DSC_0238.jpg" id="img1" />
+</body>
+</html>

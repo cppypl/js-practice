@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+#progressbox{width:300px; height:30px; position:relative; border:1px #999 solid;}
+#progressbar{ text-align:center; z-index:11; line-height:30px; position:absolute; top:0; left:0; width:100%; height:30px; color:#fff;clip:rect(0,0,30px,0);  background:blue}
+#progresstext{ text-align:center; z-index:2; line-height:30px; position:absolute; top:0; left:0; width:100%; height:30px; background:#fff; color:#333; }
+</style>
+
+<body>
+
+<div id="progressbox">
+	<div id="progressbar">0%</div>
+	<div id="progresstext">0%</div>
+</div>
+<div id="div2" style="display:none">
+	<img src="http://pica.nipic.com/2008-07-23/200872311217665_2.jpg" />
+	<img src="http://babe.1626.com/wp-content/uploads/2009/09/zuowenxuan1280x1024.jpg" />
+	<img src="http://comic.yesky.com/imagelist/2009/126/b76m14y76x07.jpg" />
+	<img src="http://www.sjbz.org/uploads/allimg/111203/1-111203152149.jpg" />
+	<img src="http://img.zol.com.cn/group/53/a526976.jpg" />
+	<img src="http://pic5.nipic.com/20100111/3393020_182206308578_2.jpg" />
+	<img src="http://hiphotos.baidu.com/anan_blackhole/pic/item/aeed4ddb270f2b0b32fa1c3e.jpg" />
+	<img src="http://hiphotos.baidu.com/anan_blackhole/pic/item/9c5084a153aaab93caefd0e3.jpg" />
+</div>
+<script>
+	var imgBox=document.getElementById('div2');
+	
+	var aImg=imgBox.getElementsByTagName('img');
+	
+	var oDiv1=document.getElementById('progressbox');
+
+	var iNow=0;
+	
+	for(var i=0; i<aImg.length;i++){
+		(function(i){
+			var yImg=new Image();
+			
+			yImg.onload=function(){
+				iNow++;
+				progressFn(parseInt(iNow/aImg.length * 100));
+				
+				if(iNow==aImg.length){
+					imgBox.style.display='block';	
+					oDiv1.style.display='none';	
+				}
+			};
+			yImg.scr=aImg[i].src;	
+		})(i);
+	}
+	
+	timer=setInterval(function(){
+		if(iNow==100){
+			clearInterval(timer);
+		}else
+		{
+			iNow+=1;
+			progressFn(iNow);
+		}
+	},100)
+	function progressFn(cent){
+		var oDiv1=document.getElementById('progressbox');
+		var oDiv2=document.getElementById('progressbar');
+		var oDiv3=document.getElementById('progresstext');
+		var allWidth=parseInt(getStyle(oDiv1,'width'));
+		
+		oDiv2.innerHTML=cent+"%";
+		oDiv3.innerHTML=cent+"%";
+		oDiv2.style.clip='rect(0,'+ cent/100*allWidth +'px,30px,0)'
+		
+	}
+	function getStyle(obj,attr){
+		if(obj.currentStyle){
+			return obj.currentStyle[attr];	
+		}else{
+			return getComputedStyle(obj,false)[attr];
+		}
+	}	
+	
+
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+*{margin:0; padding:0}
+#div1{width:600px; height:300px; margin:0 auto; border:1px #000 solid; }
+#div1 div{border-bottom:1px #000 dashed; line-height:150%; opacity:0; filter:alpha(opacity:0)}
+</style>
+<script>
+window.onload=function()
+{
+	var oTxt=document.getElementById('txt1');	
+	var oBtn=document.getElementById('btn1');
+	var oDiv=document.getElementById('div1');
+	
+	oBtn.onclick=function()
+	{
+		var oCon=document.createElement('div');
+		var aCon=oDiv.getElementsByTagName('div');
+		
+		oCon.innerHTML=oTxt.value;
+		oTxt.value='';
+		//
+		if(aCon.length)
+		{
+			oDiv.insertBefore(oCon,aCon[0])	
+		}
+		else
+		{
+			oDiv.appendChild(oCon)
+		}
+		var iHeight=oCon.offsetHeight;
+		oCon.style.height=0;
+		startMove(oCon,{height:iHeight},function(){
+			startMove(oCon,{opacity:100})	
+		})
+	}
+}
+function getStyle(obj,attr)
+{
+	if(obj.currentStyle)//如果是IE（IE只认识currentStyle）
+	{
+		return obj.currentStyle[attr];	
+	}else//如果是FF（FF只认识getComputedStyle）
+	{
+		return getComputedStyle(obj,false)[attr]	
+	}
+}
+function startMove(obj,json,fn)
+{
+	clearInterval(obj.timer)
+	obj.timer=setInterval(function(){
+		var bStop=true;
+		for(var attr in json) 
+		{
+		if(attr=='opacity')
+		{
+			var iCur=parseInt(parseFloat(getStyle(obj,attr))*100);
+		}
+		else
+		{
+			var iCur=parseInt(getStyle(obj,attr));
+		}
+		
+		  var iSpeed=(json[attr]-iCur)/8;
+		iSpeed=iSpeed>0?Math.ceil(iSpeed):Math.floor(iSpeed);
+		if(json[attr]!=iCur)
+		{
+			bStop=false;	
+		}
+		
+		if(attr=='opacity')
+			{
+				obj.style.opacity=(iCur+iSpeed)/100;
+				obj.style.filter='alpha(opacity:'+(iCur+iSpeed)+')';
+			}
+			else
+			{
+			
+				obj.style[attr]=iCur+iSpeed+'px';
+			}
+		
+		}
+		if(bStop)
+		{
+			clearInterval(obj.timer)	
+			if(fn)
+			{
+				fn()
+			}
+		}
+		
+	},30)
+}
+</script>
+<body>
+<textarea id="txt1" cols="40" rows="20"></textarea><br />
+
+<input type="button" id="btn1" value="发布" />
+
+<div id="div1">
+	<div>asdasdasdasd</div>
+</div>
+</body>
+</html>

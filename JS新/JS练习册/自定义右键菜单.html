@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+#ul1{width:100px; background:#ccc; border:1px #666 solid; padding:0; text-align:center; display:none; position:absolute}
+#ul1 li{line-height:30px}
+</style>
+<script>
+window.oncontextmenu=function(ev)
+
+{
+	var oEvent=ev||event;
+	var oUl=document.getElementById('ul1');	
+	oUl.style.display='block';
+
+	
+	oUl.style.left=oEvent.clientX+'px';
+	oUl.style.top=oEvent.clientY+'px';
+	 return false;
+}
+document.onclick=function()
+
+{
+	var oUl=document.getElementById('ul1');	 
+	oUl.style.display='none';
+}
+</script>
+<body>
+<ul id="ul1">
+	<li><a href="www.baidu.com">回到首页</a></li>
+	<li>加入我们</li>
+	<li>社会招聘</li>
+	<li>游戏下载</li>
+	<li>电影大片</li>
+	<li>神舟论坛</li>
+	<li>招商银行</li>
+</ul>
+<input type="text"/>
+</body>
+</html>

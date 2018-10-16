@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<script>
+window.onscroll=function(){
+	var oDiv=document.getElementById('div1');
+	var srollTop=document.documentElement.scrollTop||document.body.scrollTop;
+	
+	//oDiv.style.top=srollTop+(document.documentElement.clientHeight-oDiv.offsetHeight)/2+'px'
+	
+	var t=srollTop+(document.documentElement.clientHeight-oDiv.offsetHeight)/2;
+	
+	startMove(parseInt(t))
+}
+var timer=null;
+function startMove(iTarget){
+	clearInterval(timer);
+	timer=setInterval(function(){
+		var oDiv=document.getElementById('div1');
+		iSpend=(iTarget-oDiv.offsetTop)/4;
+		iSpend=iSpend>0?Math.ceil(iSpend):Math.floor(iSpend);
+		
+		if(oDiv.offsetTop==iTarget)
+		{
+			clearInterval(timer)
+			
+		}else
+		{
+			oDiv.style.top=oDiv.offsetTop+iSpend+'px';
+		}
+		txt1.value=oDiv.offsetTop+',目标'+iTarget;
+	},30)
+}
+</script>
+<body style="height:2000px">
+<div id="div1" style="height:100px; width:100px; position:absolute; right:0; background:#0099ff"></div>
+<input type="text" id="txt1" style="position:fixed;top:20px;" />
+</body>
+</html>

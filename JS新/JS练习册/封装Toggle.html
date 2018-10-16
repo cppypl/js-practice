@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<script language="JavaScript" type="text/JavaScript">
+        <!--
+        function toggle(targetid,objN){
+          
+           var target=document.getElementById(targetid);
+           var aa=document.getElementById(objN)
+        
+                    if (target.style.display=="none"){
+                        target.style.display="block";
+            aa.innerText="隐藏层";
+           
+        
+                    } else {
+                        target.style.display="none";
+            aa.innerText='显示层';
+                    }
+          
+        }
+        -->
+        </script>
+        <script>
+        	window.onload=function()
+			{
+				var oDiv2=document.getElementById('div2');
+				var oDiv=document.getElementById('div1');
+				oDiv2.onclick=function()
+				{
+					 toggle('div1','aaa')
+				}
+				
+			}
+        </script>
+<body>
+<input id="div2" type="button" value="点我隐藏"></input>
+<div id="div1" style="background:#333; width:100px; height:100px">我是内容</div>
+<ul>
+	<li id="aaa">隐藏层</li>
+</ul>
+</body>
+</html>

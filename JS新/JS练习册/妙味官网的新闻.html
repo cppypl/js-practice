@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+*{margin:0; padding:0}
+#ul1{ border:1px #F30  solid; padding:10px; width:300px; margin:0 auto; background:#FCF}
+#ul1 li{ line-height:30px; font-size:12px; color:#C00; border-bottom:1px #F66 dashed; width:300px; list-style:inside; position:relative;}
+#ul1 li div{background:#fff; width:100%; height:100%; position:absolute; top:0; left:0; opacity:0; filter:alpha(opacity:0);}
+</style>
+<script src="淡入淡出焦点图/move2.js"></script>
+<script>
+window.onload=function()
+{
+	var oUl=document.getElementById('ul1');	
+	var aLi=oUl.getElementsByTagName('li');
+	
+	for(var i=0; i<aLi.length; i++)
+	{
+		aLi[i].onmouseover=function()
+		{
+			/*var oDiv=this.getElementsByTagName('div')[0];
+			oDiv.style.opacity=1;
+			oDiv.style.filter='alpha(opacity:100)';*/
+			this.style.background='#fff';
+		}	
+		aLi[i].onmouseout=function()
+		{
+			this.style.background='';
+			var oDiv=this.getElementsByTagName('div')[0];
+			oDiv.style.opacity=0.8;
+			oDiv.style.filter='alpha(opacity:80)';
+			startMove(oDiv,{opacity:0})
+		}	
+	}
+}
+</script>
+<body>
+<ul id="ul1">
+	<li>非常帅气的Li内容就在这里了...<div></div></li>
+	<li>非常帅气的Li内容就在这里了...<div></div></li>
+	<li>非常帅气的Li内容就在这里了...<div></div></li>
+	<li>非常帅气的Li内容就在这里了...<div></div></li>
+	<li>非常帅气的Li内容就在这里了...<div></div></li>
+	<li>非常帅气的Li内容就在这里了...<div></div></li>
+	<li>非常帅气的Li内容就在这里了...<div></div></li>
+
+	<li>非常帅气的Li内容就在这里了...<div></div></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+*{margin:0; padding:0}
+body{background:#000}
+li{list-style:none}
+#ul1{width:240px; margin:20px; background:#333; float:left; border:4px  #990 solid; padding:10px}
+#ul1 li{float:left; height:40px; line-height:40px; border-bottom:2px #fff solid;  width:240px; background:#0099cc; color:#fff; font-size:12px; position:relative;}
+#ul1 li h2{ padding-left:10px; width:220px; position:relative; z-index:6}
+#ul2{position:absolute; top:-2px; left:228px; width:240px; background:#0099ff; display:none; border:2px #fff solid; padding:8px; z-index:5 }
+#ul2 li{height:32px; line-height:32px;background:#0099ff; text-indent:1em; }
+.active{background:#0099ff; border-left:2px #fff solid}
+</style>
+<script>
+window.onload=function()
+{
+	var oUl1=document.getElementById('ul1')	;
+	var aLi1=oUl1.getElementsByTagName('li');
+	
+	for(var i=0; i<aLi1.length;i++)
+	{
+		aLi1[i].onmouseover=function()
+		{
+			var oH=this.getElementsByTagName('h2')[0];	
+			var oUl2=this.getElementsByTagName('ul')[0];
+			
+			oH.className='active';
+			oUl2.style.display='block'
+		}	
+		aLi1[i].onmouseout=function()
+		{
+			var oH=this.getElementsByTagName('h2')[0];	
+			var oUl2=this.getElementsByTagName('ul')[0];
+			
+			oH.className='';
+			oUl2.style.display='none'
+		}	
+	}
+}
+</script>
+<body>
+<ul id="ul1">
+	<li style=" position:relative; border-top:2px #fff solid"><h2>数码</h2><ul id="ul2"><li>电脑</li><li>相机</li><li>MP3</li><li>手机</li></ul></li>
+	<li><h2 >衣服</h2><ul id="ul2"><li>电脑</li><li>相机</li><li>MP3</li><li>手机</li></ul></li>
+	<li><h2>电子</h2><ul id="ul2"><li>电脑</li><li>相机</li><li>MP3</li><li>手机</li></ul></li>
+	<li><h2>生活</h2><ul id="ul2"><li>电脑</li><li>相机</li><li>MP3</li><li>手机</li></ul></li>
+</ul>
+</body>
+</html>

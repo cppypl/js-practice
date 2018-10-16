@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+*{margin:0; padding:0}
+li{list-style:none}
+#ul1{width:800px; margin:0px auto}
+#ul1 li{ float:left; margin-right:10px; width:100px; height:40px; position:relative; background:#900;}
+div{width:100px; height:50px; background:red; position:absolute; top:-60px; }
+</style>
+<script>
+window.onload=function()
+{
+	var aDiv=document.getElementsByTagName('div');
+	var aLi=document.getElementsByTagName('li');
+	
+	for(var i=0; i<aLi.length; i++)
+	{
+		aLi[i].index=i;
+		aLi[i].onmouseover=function()
+		{
+			startMove(aDiv[this.index],50)	
+		}	
+		aLi[i].onmouseout=function()
+		{
+			startMove(aDiv[this.index],-60)	
+		}	
+	}
+}
+var iSpeed=0;
+var left=0;
+function startMove(obj,iTarget)
+{
+	clearInterval(obj.timer)
+	obj.timer=setInterval(function(){
+		iSpeed+=(iTarget-obj.offsetTop)/5;	
+		iSpeed*=0.7;
+		left+=iSpeed;
+		if(Math.abs(iSpeed)<1 && Math.abs(left-iTarget)<1)
+		{
+			clearInterval(obj.timer)	
+			iSpeed=0;
+			left=iTarget;
+		}
+		obj.style.top=left+'px';
+		
+		document.title=iSpeed+'||||'+iTarget;
+	},30)
+}
+</script>
+<body>
+<ul id="ul1">
+	<li><div></div></li>
+	<li><div></div></li>
+	<li><div></div></li>
+	<li><div></div></li>
+	<li><div></div></li>
+	<li><div></div></li>
+</ul>
+
+</body>
+</html>

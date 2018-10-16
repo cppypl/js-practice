@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+#div1{width:50px; height:50px; background:#ccc; position:absolute; left:315px;}
+#div2{width:300px; height:200px; background:#ccc; border:1px #666 solid; float:left; margin-right:5px; display:none;}
+.active{border:2px #0099ff solid;}
+</style>
+
+<script>
+window.onload=function(){
+	var oDiv1=document.getElementById('div1');
+	var oDiv2=document.getElementById('div2');
+	
+function hide(){
+		timer=setTimeout(function(){
+			oDiv2.style.display='none';
+			oDiv1.className=''
+		},555)
+	}
+	
+function show(){
+		setTimeout(function(){
+			oDiv2.style.display='block';
+			clearTimeout(timer);
+			oDiv1.className='active'
+			
+		},333)
+			
+	}		
+	oDiv1.onmouseover=show;
+	oDiv1.onmouseout=hide;
+	oDiv2.onmouseover=show;
+	oDiv2.onmouseout=hide
+}
+</script>
+<body>
+<div id="div1">
+</div>
+<div id="div2">这是内容框 ，你有见过吗？</div>
+</body>
+</html>

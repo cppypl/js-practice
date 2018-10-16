@@ -1,0 +1,191 @@
+加入收藏
+<a onClick="window.external.AddFavorite(location.href,document.title)" style="cursor:hand">加入收藏</a>
+
+设为首页
+<a  style="cursor:hand" onclick=this.style.behavior="url(#default#homepage)";this.setHomePage("http://www.85wg.com");>设为首页</a>
+
+
+ js获取屏幕宽度及操作
+分类： JS 2011-08-10 10:09 818人阅读 评论(0) 收藏 举报
+ 网页可见区域宽：document.body.clientWidth 
+网页可见区域高：document.body.clientHeight 
+网页可见区域宽：document.body.offsetWidth (包括边线的宽) 
+网页可见区域高：document.body.offsetHeight (包括边线的宽) 
+网页正文全文宽：document.body.scrollWidth 
+网页正文全文高：document.body.scrollHeight 
+网页被卷去的高：document.body.scrollTop 
+网页被卷去的左：document.body.scrollLeft 
+网页正文部分上：window.screenTop 
+网页正文部分左：window.screenLeft 
+屏幕分辨率的高：window.screen.height 
+屏幕分辨率的宽：window.screen.width 
+屏幕可用工作区高度：window.screen.availHeight 
+屏幕可用工作区宽度：window.screen.availWidth 
+
+
+HTML精确定位:scrollLeft,scrollWidth,clientWidth,offsetWidth 
+scrollHeight: 获取对象的滚动高度。 
+scrollLeft:设置或获取位于对象左边界和窗口中目前可见内容的最左端之间的距离 
+scrollTop:设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离 
+scrollWidth:获取对象的滚动宽度 
+offsetHeight:获取对象相对于版面或由父坐标 offsetParent 属性指定的父坐标的高度 
+offsetLeft:获取对象相对于版面或由 offsetParent 属性指定的父坐标的计算左侧位置 
+offsetTop:获取对象相对于版面或由 offsetTop 属性指定的父坐标的计算顶端位置 
+event.clientX 相对文档的水平座标 
+event.clientY 相对文档的垂直座标 
+event.offsetX 相对容器的水平坐标 
+event.offsetY 相对容器的垂直坐标 
+document.documentElement.scrollTop 垂直方向滚动的值 
+event.clientX+document.documentElement.scrollTop 相对文档的水平座标+垂直方向滚动的量 
+
+IE，FireFox 差异如下： 
+
+IE6.0、FF1.06+： 
+
+clientWidth = width + padding 
+
+clientHeight = height + padding 
+
+offsetWidth = width + padding + border 
+
+offsetHeight = height + padding + border 
+
+IE5.0/5.5： 
+clientWidth = width - border 
+
+clientHeight = height - border 
+
+offsetWidth = width 
+
+offsetHeight = height 
+
+(需要提一下：CSS中的margin属性，与clientWidth、offsetWidth、clientHeight、offsetHeight均无关) 
+
+
+
+文字上浮：<marquee direction="up" height="146" onmouseout=start() onmouseover=stop() scrollamount=4>文字内容</marquee>
+
+添加背景音乐：<embed src="音乐.mp3" autostart="true" loop="true" height="true">
+
+
+弹出窗口：1、window.open("网页名")
+2、参数
+window.open("网页名"，"标题", "属性特征")
+省略菜单栏①menubar:YES/NO
+省略地址栏②location:YES/NO
+
+3、链接数据库
+<?php
+$conn=@mysql_connect("localhost","root","") or die ("链接错误");
+mysql_select_db("newdb1")
+
+?>
+
+<img src="image/1.jpg" onmousemove="this.src="你的新图片" >
+
+
+框架
+<frameset rows="64,*"  frameborder="NO" border="0" framespacing="0">	
+
+<frame src="top.php" noresize="noresize" frameborder="NO" name="topFrame" scrolling="no" marginwidth="0" marginheight="0" target="main" />
+<frameset cols="220,*"  rows="560,*" id="frame">	
+
+<frame src="left.php" name="leftFrame" noresize="noresize" marginwidth="0" marginheight="0" frameborder="0" target="main" />
+<frame src="right.php" name="main" marginwidth="0" marginheight="0" frameborder="0" scrolling="auto" target="_self" />
+<noframes>    </noframes>
+
+
+
+
+jquery-----------
+弹出QQ对话！~~~~~~~~~~~~~~~~~~~~~~~~
+<script language="javascript" src="http://www.pin-color.net/qqservice/f.asp?qq1=277201157&qq2=363885637&qq3=282523648"></script>
+
+使用 Google 的 CDN
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs
+/jquery/1.4.0/jquery.min.js"></script>
+
+使用 Microsoft 的 CDN
+<head>
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery
+/jquery-1.4.min.js"></script>
+</head>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#button").click(function(){
+			$("#tt").slideToggle(500)
+		})
+	})
+</script>
+
+hide(速度)；隐藏；show(速度)；显示、Toggle(速度)交替；
+event.stopPropagation();  //取消事件冒泡  
+
+slideDown()\slideUp()\slideToggle() 滚动向下、上、上下来回
+fadeIn()\fadeOut()\fadeTo(时间、透明度) 淡入、淡出、淡到指定程度
+
+$(this) 当前 HTML 元素 
+$("p") 所有 <p> 元素 
+$("p.intro") 所有 class="intro" 的 <p> 元素 
+$(".intro") 所有 class="intro" 的元素 
+$("#intro") id="intro" 的第一个元素 
+$("ul li:first") 每个 <ul> 的第一个 <li> 元素 
+$("[href$='.jpg']") 所有带有以 ".jpg" 结尾的属性值的 href 属性 
+$("div#intro .head") id="intro" 的 <div> 元素中的所有 class="head" 的元素 
+
+
+$(document).ready(function) 将函数绑定到文档的就绪事件（当文档完成加载时） 
+$(selector).click(function) 触发或将函数绑定到被选元素的点击事件 
+$(selector).dblclick(function) 触发或将函数绑定到被选元素的双击事件 
+$(selector).focus(function) 触发或将函数绑定到被选元素的获得焦点事件 
+$(selector).mouseover(function) 触发或将函数绑定到被选元素的鼠标悬停事件 
+
+jQuery 效果
+$(selector).hide() 隐藏被选元素 
+$(selector).show() 显示被选元素 
+$(selector).toggle() 切换（在隐藏与显示之间）被选元素 
+$(selector).slideDown() 向下滑动（显示）被选元素 
+$(selector).slideUp() 向上滑动（隐藏）被选元素 
+$(selector).slideToggle() 对被选元素切换向上滑动和向下滑动 
+$(selector).fadeIn() 淡入被选元素 
+$(selector).fadeOut() 淡出被选元素 
+$(selector).fadeTo() 把被选元素淡出为给定的不透明度 
+$(selector).animate() 对被选元素执行自定义动画 
+
+jQuery HTML 操作
+$(selector).html(content) 改变被选元素的（内部）HTML 
+$(selector).append(content) 向被选元素的（内部）HTML 追加内容 
+$(selector).prepend(content) 向被选元素的（内部）HTML “预置”（Prepend）内容 
+$(selector).after(content) 在被选元素之后添加 HTML 
+$(selector).before(content) 在被选元素之前添加 HTML 
+
+jQuery CSS 函数
+$(selector).css(name,value) 为匹配元素设置样式属性的值 
+$(selector).css({properties}) 为匹配元素设置多个样式属性 
+$(selector).css(name) 获得第一个匹配元素的样式属性值 
+$(selector).height(value) 设置匹配元素的高度 
+$(selector).width(value) 设置匹配元素的宽度 
+
+
+jQuery AJAX 请求 如：$('#myDiv').load('/jquery/test1.txt');
+
+$(selector).load(url,data,callback) 把远程数据加载到被选的元素中 
+$.ajax(options) 把远程数据加载到 XMLHttpRequest 对象中 
+$.get(url,data,callback,type) 使用 HTTP GET 来加载远程数据 
+$.post(url,data,callback,type) 使用 HTTP POST 来加载远程数据 
+$.getJSON(url,data,callback) 使用 HTTP GET 来加载远程 JSON 数据 
+$.getScript(url,callback) 加载并执行远程的 JavaScript 文件 
+
+
+使用ajax来改变内容
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#b01").click(function(){
+  htmlobj=$.ajax({url:"/jquery/test1.txt",async:false});
+  $("#myDiv").html(htmlobj.responseText);
+  });
+});
+</script>
+

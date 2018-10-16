@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<script>
+function myAddEvent(obj,sEvent,fn)
+{
+	if(obj.attachEvent)
+	{
+		obj.attachEvent('on'+sEvent,fn)
+	}
+	else
+	{
+		obj.addEventListener(sEvent,fn,false)
+	}	
+}
+myAddEvent(window,'scroll',Scroll);
+myAddEvent(window,'load',Load);
+function Scroll()
+{
+	var oDiv=document.getElementById('div1');	
+	var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+	var t=scrollTop+(document.documentElement.clientHeight-oDiv.offsetHeight)/2;
+	startMove1(parseInt(t))
+}
+function Load()
+{
+	var oClose=document.getElementById('closed');
+	oClose.onclick=function(){
+		oDiv.style.display='none';
+	};
+	var oDiv=document.getElementById('div1');	
+}
+var timer=null;
+var Right=-150;
+
+function startMove1(iTarget)
+{
+	clearInterval(timer)
+	timer=setInterval(function(){
+		var oDiv=document.getElementById('div1');	
+		var iSpend=(iTarget-oDiv.offsetTop)/8;
+		
+		iSpend=iSpend>0?Math.ceil(iSpend):Math.floor(iSpend);
+		
+		if(oDiv.offsetTop==iTarget)
+		{
+			clearInterval(timer)	
+		}
+		else
+		{
+			oDiv.style.top=oDiv.offsetTop+iSpend+'px'	
+		}
+	},30)
+}
+</script>
+<script> 
+//对联广告根据判断body宽度调整是否开启
+var kf1 = document.getElementById('kefu');
+setInterval(function(){
+	var bw = document.body.clientWidth;
+
+	if (bw <= 1024){
+		kf1.style.display = 'none';
+	}else{
+		kf1.style.display = 'block';
+	}
+},1);
+</script>
+
+<body style="height:3333px">
+<div id="div1" style="background:#666; height:300px; width:150px; position:absolute; left:0; text-align:center; line-height:200%; font-weight:bold; color:#fff ">
+    <div style="position:absolute; top:300px; right:0; width:50px; height:30px; background:red" id="closed">关闭</div>
+</div>
+</body>
+</html>

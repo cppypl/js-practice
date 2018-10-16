@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+li{list-style:none; float:left; margin-right:1px; background:#ccc; border:1px #666 solid; width:50px; height:50px;}
+.select{ background:#6699ff}
+#text1{width:255px; height:50px; border:1px #666 solid; display:none; overflow:hidden; font-size:24px; line-height:50px; text-align:center; font-weight:bold}
+</style>
+<script type="text/javascript">
+var arr=['很差','较差','一般','较好','很好']
+window.onload=function(){
+	var oDiv=document.getElementById('text1');
+	var oUl=document.getElementById('ul1')
+	var oLi=oUl.getElementsByTagName('li');
+	
+	
+	for(var i=0; i<oLi.length;i++)
+	{
+		oLi[i].index=i;
+		
+		oLi[i].onmouseover=function(){
+			oDiv.style.display='block';
+			oDiv.innerHTML=arr[this.index]
+			for(var i=0;i<=this.index;i++)
+			{
+				oLi[i].className='select'	
+			}
+		}
+		oLi[i].onmouseout=function(){
+			oDiv.style.display='none';
+			for(var i=0;i<=this.index;i++)
+			{
+				oLi[i].className=''	
+			}
+		}
+		oLi[i].onclick=function(){
+			alert(oDiv.innerHTML)	
+		}
+	}
+}
+</script>
+<body>
+<ul id="ul1">
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+<div id="text1">
+</div>
+</body>
+</html>

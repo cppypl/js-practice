@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<script  src="move.js"></script>
+<style>
+*{margin:0; padding:0}
+#picbox{width:800px; margin:10px auto; border:2px #000 solid; overflow:hidden; height:400px; position:relative }
+#bigpic{position:relative;}
+#bigpic img{position:absolute; z-index:1; left:0; top:0; }
+#ul{position:absolute; bottom:0px; left:0; z-index:99999}
+#ul li{ padding:10px; float:left; background:#ccc; list-style:none; border:1px #999 solid; cursor:pointer}
+</style>
+<script>
+window.onload=function(){
+	var aPic=document.getElementById('bigpic').getElementsByTagName('img');
+	var aLi=document.getElementById('ul').getElementsByTagName('li');
+	var iNow=2;
+	for(var i=0;i<aLi.length;i++)
+	{
+		aLi[i].index=i;
+		aLi[i].onclick=function(){
+			for(var i=0;i<aLi.length;i++)
+			{
+				aLi[i].style.background='#ccc';
+				aPic[i].style.opacity=0;
+				aPic[i].style.filter='alpha(opacity:0)';
+				
+			}
+			this.style.background='red';
+			startMove(aPic[this.index],{opacity:100})
+		};
+	}	
+};
+</script>
+<body>
+<div id="picbox">
+	<div id="bigpic">
+ 		<img src="Akali_Splash_0.jpg" width="800" height="400" style="opacity:1; filter:alpha(opacity:100)"  />
+ 		<img src="Akali_Splash_1.jpg" width="800" height="400"  />
+ 		<img src="Akali_Splash_2.jpg" width="800" height="400"  />
+ 		<img src="Akali_Splash_3.jpg" width="800" height="400"  />
+    </div>
+    <ul id="ul">
+    	<li style="background:red;">1</li>
+    	<li>2</li>
+    	<li>3</li>
+    	<li>4</li>
+    </ul>
+</div>
+</body>
+</html>

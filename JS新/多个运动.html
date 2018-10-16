@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+div{margin-top:10px; background:red; width:100px; height:50px; border:1px #000 solid}
+</style>
+<script>
+window.onload=function()
+{
+	var aDiv=document.getElementsByTagName('div');	
+	
+	var i=0;
+	
+	for(i=0; i<aDiv.length;i++)
+	{
+		aDiv[i].timer=null;
+		aDiv[i].onmouseover=function()
+		{
+			startMove(this,300)	
+		}
+		aDiv[i].onmouseout=function()
+		{
+			startMove(this,100)	
+		}
+	}
+}
+function getStyle(obj,attr)
+{
+	if(obj.currentStyle)//如果是IE（IE只认识currentStyle）
+	{
+		return obj.currentStyle[attr];	
+	}else//如果是FF（FF只认识getComputedStyle）
+	{
+		return getComputedStyle(obj,false)[attr]	
+	}
+}
+function startMove(obj,iTarget)
+{
+	clearInterval(obj.timer)
+	obj.timer=setInterval(function(){
+		var iCur=parseInt(getStyle(obj,'width'))
+		var iSpend=(iTarget-iCur)/8;
+		iSpend=iSpend>0?Math.ceil(iSpend):Math.floor(iSpend);
+		
+		if(iCur==iTarget)
+		{
+			clearInterval(obj.timer);	
+		}	
+		else
+		{
+			obj.style.width=iCur+iSpend+'px'	
+		}
+	},30)
+}
+
+</script>
+<body>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>

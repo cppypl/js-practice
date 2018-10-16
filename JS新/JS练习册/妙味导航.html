@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+*{margin:0; padding:0}
+li{list-style:none}
+#ul1{border:1px #999 solid; position:relative; margin:10px auto; height:30px;border-right:none;}
+#ul1 li{float:left; width:150px; border-right:1px #999 solid; background:#eee; height:30px; position:relative}
+#ul1 li div{position:absolute; top:0; left:0; z-index:11; width:100%; height:100%; text-align:center; line-height:30px;}
+#ul1 #bg{border-right:none; width:151px; background:red; position:absolute; left:0; top:0; z-index:0}
+</style>
+<script>
+window.onload=function()
+{
+	var oUl=document.getElementById('ul1');	
+	var aLi=oUl.getElementsByTagName('li');
+	var oBg=document.getElementById('bg');
+	oUl.style.width=(aLi.length-1)*151+'px'
+	for(var i=0;i<aLi.length-1;i++)
+	{
+		aLi[i].onmouseover=function()
+		{
+			//alert(this.offsetLeft)
+			startMove(oBg,this.offsetLeft)
+			//oBg.style.left=this.offsetLeft+'px'
+		}
+	}
+}
+var iSpeed=0;
+var left=0;
+function startMove(obj,iTarget)
+{
+	clearInterval(obj.timer)
+	obj.timer=setInterval(function(){
+		 iSpeed+=(iTarget-obj.offsetLeft)/5;
+		iSpeed*=0.7;
+		left+=iSpeed;
+		obj.style.left=left+'px'	
+		document.title=obj.offsetLeft+' | '+iTarget;
+	},30)
+}
+</script>
+<body>
+<ul id="ul1">
+	<li><div>首页</div></li>
+	<li><div>首页</div></li>
+	<li><div>首页</div></li>
+	<li><div>首页</div></li>
+	<li><div>首页</div></li>
+	<li id="bg"></li>
+	
+</ul>
+</body>
+</html>

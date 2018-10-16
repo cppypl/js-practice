@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<style>
+*{margin:0; padding:0}
+#ul1{width:366px; margin:0 auto;}
+#ul1 li{width:100px; margin:10px; border:1px #999 solid; background:#ccc; list-style:none; float:left; height:100px;}
+</style>
+<script src="淡入淡出焦点图/move2.js"></script>
+<script>
+
+window.onload=function()
+{
+	var oUl=document.getElementById('ul1');	
+	var aLi=oUl.getElementsByTagName('li');
+	var iMinZindex=2;
+	for(var i=0; i<aLi.length;i++)
+	{
+		aLi[i].innerHTML=aLi[i].offsetLeft+'=='+aLi[i].offsetTop
+		aLi[i].style.left=aLi[i].offsetLeft+'px';
+		aLi[i].style.top=aLi[i].offsetTop+'px';
+		
+		
+	}
+	for(var i=0; i<aLi.length;i++)
+	{
+		aLi[i].style.position='absolute';
+		aLi[i].style.margin=0;
+		
+	}
+/*	for(i=0;i<aLi.length;i++)
+	{
+		aLi[i].onmouseover=function ()
+		{
+			this.style.zIndex=iMinZindex++;
+			startMove(this, {width: 200, height: 200, marginLeft: -50, marginTop: -50});
+		};
+		aLi[i].onmouseout=function ()
+		{
+			startMove(this, {width: 100, height: 100, marginLeft: 0, marginTop: 0});
+		};
+	} */
+	for(var i=0; i<aLi.length;i++)
+	{
+		aLi[i].onmouseover=function()
+		{
+			this.style.zIndex=iMinZindex++;
+			startMove(this,{height:200,width:200,marginTop:-50,marginLeft:-50})	;
+		}
+		aLi[i].onmouseout=function()
+		{
+			
+			startMove(this,{height:100,width:100,marginTop:0,marginLeft:0})	;
+		}
+		
+	}
+}
+</script>
+<body>
+
+<ul id="ul1">
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+</body>
+</html>

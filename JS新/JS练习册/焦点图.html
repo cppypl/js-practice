@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+*{margin:0; padding:0}
+
+li{list-style:none}
+#bigpic{width:300px; margin:0 auto; height:300px }
+.tool{ margin:0 auto; width:300px; overflow:hidden;}
+#bigpic li {width:300px; height:300px; position:absolute; background:#ccc;}
+#smallpic { width:500px; position:absolute; left:0; top:0}
+#smallpic li{ float:left; width:100px; height:100px; border-right:1px #999 solid; background:#666}
+#left{width:50px; height:100px; background:red; float:left}
+.center{width:200px; float:left; height:100px; position:relative; overflow:hidden}
+#right{float:left; width:50px; height:100px; background:red;}
+</style>
+<script>
+function getStyle(obj, attr)
+{
+	if(obj.currentStyle)
+	{
+		return obj.currentStyle[attr];
+	}
+	else
+	{
+		return getComputedStyle(obj, false)[attr];
+	}
+}
+
+function startMove(obj, json, fn)
+{
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function (){
+		var bStop=true;		//这一次运动就结束了——所有的值都到达了
+		for(var attr in json)
+		{
+			//1.取当前的值
+			var iCur=0;
+			
+			if(attr=='opacity')
+			{
+				iCur=parseInt(parseFloat(getStyle(obj, attr))*100);
+			}
+			else
+			{
+				iCur=parseInt(getStyle(obj, attr));
+			}
+			
+			//2.算速度
+			var iSpeed=(json[attr]-iCur)/8;
+			iSpeed=iSpeed>0?Math.ceil(iSpeed):Math.floor(iSpeed);
+			
+			//3.检测停止
+			if(iCur!=json[attr])
+			{
+				bStop=false;
+			}
+			
+			if(attr=='opacity')
+			{
+				obj.style.filter='alpha(opacity:'+(iCur+iSpeed)+')';
+				obj.style.opacity=(iCur+iSpeed)/100;
+			}
+			else
+			{
+				obj.style[attr]=iCur+iSpeed+'px';
+			}
+		}
+		
+		if(bStop)
+		{
+			clearInterval(obj.timer);
+			
+			if(fn)
+			{
+				fn();
+			}
+		}
+	}, 30)
+}
+window.onload=function()
+{
+	var oBigUl=document.getElementById('bigpic');	
+	var aBigLi=oBigUl.getElementsByTagName('li');
+	
+	var oSmallUl=document.getElementById('smallpic');
+	var aSmallLi=oSmallUl.getElementsByTagName('li');
+	
+	var oLeft=document.getElementById('left');
+	var oRight=document.getElementById('right');
+	
+	var iMinZindex=2;
+	for(var i=0;i<aSmallLi.length;i++)
+	{
+		aSmallLi[i].index=i;
+		aSmallLi[i].onclick=function()
+		{
+			aBigLi[this.index].style.zIndex=iMinZindex++; 
+			aBigLi[this.index].style.opacity=0;
+			aBigLi[this.index].style.filter='alpha(opacity:0)';
+			startMove(aBigLi[this.index],{opacity:100})
+		}
+	}
+}
+
+</script>
+<body>
+<ul id="bigpic">
+	<li>111111111111111111111111111111111</li>
+	<li>22222222222222222222222222222</li>
+	<li>3333333333333333333333333333333333</li>
+	<li>4444444444444444444444444444444</li>
+</ul>
+<div class="tool">
+	<div id="left">向左</div>
+	<div class="center">
+		 <ul id="smallpic">
+			<li>图片1</li>
+			<li>图片2</li>
+			<li>图片3</li>
+			<li>图片4</li>
+  	  </ul>
+	</div>
+	<div id="right">向右</div>
+</div>
+</body>
+</html>

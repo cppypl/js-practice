@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="js/ajax.js"></script>
+<script>
+window.onload=function()
+{
+	var oUl=document.getElementById('ul1');	
+	var aBtn=document.getElementsByTagName('a');
+	
+	for(var i=0; i<aBtn.length;i++)
+	{
+		aBtn[i].index=i;
+		aBtn[i].onclick=function()
+		{
+			ajax('page'+this.index+'.txt?t='+new Date().getTime(),function (str){
+				//var arr=eval(str)
+				var aData=eval(str)
+				//alert(aData[0].name)
+				oUl.innerHTML='';
+				for(var i=0; i<aData.length;i++)
+				{
+					var oLi=document.createElement('li');
+					oLi.innerHTML=	'<strong>'+aData[i].name+'</strong>　　<i>'+aData[i].sex+'</i>';
+					
+					oUl.appendChild(oLi);
+				}	
+			})	
+		}	
+	}
+}
+</script>
+<style>
+*{margin:0; padding:0}
+li{list-style:none; height:30px; line-height:30px;}
+#ul1{border:1px #000 solid; background:#ccc}
+</style>
+</head>
+
+<body>
+<ul id="ul1">
+</ul>
+<a href="javascript:">1</a>
+<a href="javascript:">2</a>
+<a href="javascript:">3</a>
+</body>
+</html>

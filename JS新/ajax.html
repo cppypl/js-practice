@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<script>
+window.onload=function()
+{
+	//创建ajax，判断是否是IE6
+	var oAjax=null;
+	if(window.XMLHttpRequest)
+	{
+		oAjax=new XMLHttpRequest();	
+	}	
+	else
+	{
+		oAjax=new ActiveXObject("Microsoft.XMLHTTP");	
+	}
+	
+	//连接服务器
+	oAjax.open('GET','abc.txt',true)
+	
+	//发送请求
+	oAjax.send()
+	alert(oAjax.readyState)	
+	//接收返回
+	
+	oAjax.onreadystatechange=function()
+	{
+		alert(oAjax.readyState)	
+	}
+}
+</script>
+<body>
+</body>
+</html>

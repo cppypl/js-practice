@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title><br />
+<style>
+*{margin:0; padding:0}
+#div1{width:100px; height:100px; background:#ccc; float:left; position:absolute; left:500px; }
+</style>
+<script>
+window.onload=function()
+{
+function startMove(obj,iTarget){
+	clearInterval(timer)
+	var oDiv=document.getElementById('div1');
+	timer=setInterval(function(){
+		var iSpend=(iTarget-obj.offsetLeft)/8;
+		if(iSpend>0)
+		{
+			iSpend=Math.ceil(iSpend)
+			}else
+			{
+				iSpend=Math.floor(iSpend)
+				}
+		if(obj.offsetLeft==iTarget)
+		{
+			clearInterval(timer)
+			}else
+			{
+				obj.style.left=obj.offsetLeft+iSpend+'px'	
+				document.title=obj.offsetLeft;
+				}
+		},30)
+	
+}
+startMove(oDiv,300)
+}
+</script>
+</head>
+
+<body>
+<div id="div1"  ></div>
+</body>
+</html>

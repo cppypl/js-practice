@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<script>
+function toDouble(num){  //为了让 1-9秒 变成01-09秒
+	if(num<10)
+	{
+		return '0'+num;
+	}else
+	{
+		return ''+num	
+	}
+}
+
+	
+window.onload=function(){
+
+	
+
+	
+	
+	var oLi=document.getElementsByTagName('img');
+	var bTn=document.getElementById('btn1');
+ 	function show(){
+		var time=new Date()
+		var now_time=''+toDouble(time.getHours())+toDouble(time.getMinutes())+toDouble(time.getSeconds());
+		for(var i=0;i<oLi.length;i++)
+		{
+			oLi[i].src='img/'+now_time.charAt(i)+'.png';
+			
+		}
+	}
+	setInterval(show,1000)
+	 show() //为了直接显示
+}
+
+</script>
+
+<body background="">
+<style>
+li{float:left; list-style:none;}
+span{ font-size:30px}
+</style>
+<ul>
+	<img src="img/0.png" />
+	<img src="img/0.png" />
+	<span>时</span>
+	<img src="img/0.png" />
+	<img src="img/0.png" />
+	<span>分</span>
+	<img src="img/0.png" />
+	<img src="img/0.png" />
+    	<span>秒</span>
+
+</ul>
+</body>
+</html>
