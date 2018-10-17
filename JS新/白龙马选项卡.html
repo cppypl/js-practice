@@ -1,0 +1,435 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><style>
+*{margin:0 ; padding:0}
+li{list-style:none}
+.chy_piclistbox {
+width: 450px;
+height: 368px;
+position: relative;
+overflow: hidden;
+}
+#chy_ifocus_piclist {
+width: 450px;
+height: 300px;
+overflow: hidden;
+margin-bottom: 10px;
+}
+#chy_ifocus_piclist li {
+width: 450px;
+height: 300px;
+overflow: hidden;
+float: left;
+text-align: center;
+vertical-align: middle;
+background:#eee;
+}
+#chy_ifocus_piclist img {
+max-width: 450px;
+
+}
+#chy_ifocus_btn {
+margin-left: 36px;
+height: 57px;
+width: 430px;
+overflow: hidden;
+}
+#chy_ifocus_btn li {
+text-align: center;
+vertical-align: middle;
+float: left;
+cursor: pointer;
+width: 75px;
+height: 50px;
+margin-right: 1px;
+padding-top: 7px;
+position: relative;
+cursor: pointer;
+}
+#chy_ifocus_btn img {
+max-width: 75px;
+max-height: 50px;
+overflow: hidden;
+cursor:pointer
+}
+#chy_ifocus_btn li em {
+width: 75px;
+height: 57px;
+background: url(http://img2.bitautoimg.com/taoche/taoche2014/ico_a.png) no-repeat -398px 0;
+position: absolute;
+left: 0;
+top: 0;
+display: none;
+z-index: 10;
+}
+#chy_ifocus_btn li.current em {
+display: block;
+}
+.goleft {
+position: absolute;
+left: 0;
+bottom: 1px;
+width: 35px;
+height: 50px;
+}
+.goleft a, .goright a {
+width: 35px;
+height: 50px;
+overflow: hidden;
+display: block;
+background-color: #999;
+}
+.goleft a:hover, .goright a:hover{background:#00bfff}
+.goleft a span {
+width: 0;
+height: 11px;
+padding-left: 7px;
+font-size: 0;
+overflow: hidden;
+line-height: 0;
+background: url(http://img2.bitautoimg.com/taoche/taoche2014/ico_a.png) no-repeat -10px -80px;
+display: block;
+margin-top: 20px;
+margin-left: 14px;
+}
+.goright {
+position: absolute;
+right: -1px;
+bottom: 1px;
+width: 35px;
+height: 50px;
+}
+.goright a span {
+width: 0;
+height: 11px;
+padding-left: 7px;
+font-size: 0;
+overflow: hidden;
+line-height: 0;
+background: url(http://img2.bitautoimg.com/taoche/taoche2014/ico_a.png) no-repeat -41px -80px;
+display: block;
+margin-top: 20px;
+margin-left: 14px;
+}
+.tc14-piczs {
+position: absolute;
+left: 178px;
+top: 266px;
+height: 24px;
+line-height: 24px;
+padding: 0 12px;
+color: #fff;
+background-color: #151411;
+display: block;
+z-index: 20;
+border-radius: 10px;
+}
+.focus_left {
+position: absolute;
+top: 103px;
+left: 0;
+width: 50px;
+height: 80px;
+display: block;
+}
+.focus_left i {
+width: 28px;
+height: 50px;
+background-image: url(http://img2.bitautoimg.com/taoche/taoche2014/ico_a.png);
+background-position: -439px -296px;
+z-index: 3;
+position: absolute;
+top: 17px;
+left: 12px;
+display: block;
+}
+.focus_left em {
+width: 0;
+height: 80px;
+padding-left: 50px;
+font-size: 0;
+overflow: hidden;
+background-color: #000;
+opacity: .4;
+filter: Alpha(opacity=50);
+z-index: 2;
+position: absolute;
+top: 0;
+left: 0;
+}
+.focus_right {
+position: absolute;
+top: 103px;
+right: 0;
+width: 50px;
+height: 80px;
+display: block;
+}
+.focus_right i {
+width: 28px;
+height: 50px;
+background-image: url(http://img2.bitautoimg.com/taoche/taoche2014/ico_a.png);
+background-position: -450px -364px;
+z-index: 3;
+position: absolute;
+top: 17px;
+left: 12px;
+display: block;
+}
+.focus_right em {
+width: 0;
+height: 80px;
+padding-left: 50px;
+font-size: 0;
+overflow: hidden;
+background-color: #000;
+opacity: .4;
+filter: Alpha(opacity=50);
+z-index: 2;
+position: absolute;
+top: 0;
+right: 0;
+}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="API/jquery-1.11.2.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="chy_piclistbox">
+    <ul id="chy_ifocus_piclist" style="overflow: hidden; position: absolute; z-index: 1; left: 0px; width: 3600px;">                
+                                             <li><img src="http://www.bylongma.com/upload/image/car/big/58524c39518de.jpg"></li>
+                                            <li><img src="http://www.bylongma.com/upload/image/car/big/58524c2fb72fb.jpg"></li>
+                                            <li><img src="http://www.bylongma.com/upload/image/car/big/58524c3688325.jpg"></li>
+                                            <li><img src="http://www.bylongma.com/upload/image/car/big/58524c3b44bac.jpg"></li>
+                                            <li><img src="http://www.bylongma.com/upload/image/car/big/58524c3cbedf5.jpg"></li>
+                                            <li><img src="http://www.bylongma.com/upload/image/car/big/58524c3e882fb.jpg"></li>
+                                            <li><img src="http://www.bylongma.com/upload/image/car/big/58524c418c65a.jpg"></li>
+                                            <li><img src="http://www.bylongma.com/upload/image/car/big/58524c4a40b74.jpg"></li>
+                                                    
+    </ul>
+                <ul id="chy_ifocus_btn" style="overflow: hidden; position: absolute; z-index: 1; bottom: 1px; left: 0px; width: 608px;">
+                                                       	  <li class="addCarpic carPic current"><img src="http://www.bylongma.com/upload/image/car/min/58524c39518de.jpg"><em></em></li>
+                                                      	  <li><img src="http://www.bylongma.com/upload/image/car/min/58524c2fb72fb.jpg"><em></em></li>
+                                                      	  <li><img src="http://www.bylongma.com/upload/image/car/min/58524c3688325.jpg"><em></em></li>
+                                                      	  <li><img src="http://www.bylongma.com/upload/image/car/min/58524c3b44bac.jpg"><em></em></li>
+                                                      	  <li><img src="http://www.bylongma.com/upload/image/car/min/58524c3cbedf5.jpg"><em></em></li>
+                                                      	  <li><img src="http://www.bylongma.com/upload/image/car/min/58524c3e882fb.jpg"><em></em></li>
+                                                      	  <li><img src="http://www.bylongma.com/upload/image/car/min/58524c418c65a.jpg"><em></em></li>
+                                                      	  <li><img src="http://www.bylongma.com/upload/image/car/min/58524c4a40b74.jpg"><em></em></li>
+                                                   
+                </ul>
+                <div class="goleft nohover" style="z-index: 2">
+                    <a href="javascript:;"><span>向左</span></a></div>
+                <div class="goright" style="z-index: 2">
+                    <a href="javascript:;"><span>向右</span></a></div>
+                <div class="tc14-piczs" style="z-index: 2; display: block;">
+                    共有
+                    <span class="allCarNum">18</span>
+                    张图片
+                </div>
+                <a href="javascript:;" class="focus_left" style="z-index: 2; display: none;"><i></i>
+                    <em>上一张</em></a> <a href="javascript:;" class="focus_right" style="z-index: 2; display: block;">
+                        <i></i><em>下一张</em></a>
+            </div>
+            
+            
+            <script>
+
+//点击下一步之后跳转
+//function oldchangefunc() {
+//    var ucarid = jQuery("#hdUcarId").val();
+//    if (jQuery("#rdoSend")[0].checked) {
+//        location.href = '/jiaohuan/publish.aspx?ucarid=' + ucarid;
+//    } else if (jQuery("#rdoNoSend")[0].checked) {
+//        location.href = '/jiaohuan/sellcar.aspx?ucarid=' + ucarid;
+//    }
+//}
+var intshow = 0;
+$.scrollPics = function () {
+    var maxsize = 5;
+    var space = 2; //间格
+    var size = 0;
+    var options = { wait:10, container: $("#chy_ifocus_piclist"), conleft: $(".focus_left"), conright: $(".focus_right"), consize: $(".tc14-piczs"), conwidth: 450, icons: $("#chy_ifocus_btn"), iconleft: $(".goleft"), iconright: $(".goright"), iconwidth: 76, clickleft: function () {
+        if (options.container.is(":animated")) { return; } //动画进行中不在执行动画
+        var index = options.icons.find("li.current").index();
+        if (index < 1) {
+            return false;
+        } else {
+            var tid = index - 1;
+            options.icons.find(".current").removeClass("current");
+            options.icons.find("li:eq(" + tid + ")").addClass("current");
+
+            if (tid >= space && tid < size - space) {
+                options.icons.animate({ "left": (-(tid - space) * options.iconwidth) + "px" });
+            }
+            options.container.animate({ "left": (-(tid * options.conwidth)) + "px" });
+            if (tid < 1) {
+                options.conleft.hide();
+                if (!options.iconleft.hasClass("nohover") && size > maxsize) {
+                    options.iconleft.addClass("nohover");
+                }
+            }
+            if (tid < size - 1) {
+                if (!options.conleft.is(":hidden")) {
+                    options.conright.show();
+                }
+                if (options.iconright.hasClass("nohover") && size > maxsize) {
+                    options.iconright.removeClass("nohover");
+                }
+            }
+        }
+    }, clickright: function () {
+        if (options.container.is(":animated")) { return; } //动画进行中不在执行动画
+        var index = options.icons.find("li.current").index();
+        if (index >= size - 1) {
+            return false;
+        } else {
+            var tid = index + 1;
+            options.icons.find(".current").removeClass("current");
+            options.icons.find("li:eq(" + tid + ")").addClass("current");
+            if (tid > space && tid < size - space) {
+                options.icons.animate({ "left": (-(tid - space) * options.iconwidth) + "px" });
+            }
+            options.container.animate({ "left": (-(tid * options.conwidth)) + "px" });
+            if (tid >= size - 1) {
+                options.conright.hide();
+
+                if (!options.iconright.hasClass("nohover") && size > maxsize) {
+                    options.iconright.addClass("nohover");
+                }
+            }
+            if (tid > 0) {
+                if (!options.conright.is(":hidden")) {
+                    options.conleft.show();
+                }
+                if (options.iconleft.hasClass("nohover") && size > maxsize) {
+                    options.iconleft.removeClass("nohover");
+                }
+            }
+        }
+    }, clickme: function () {
+        if (options.container.is(":animated")) { return; } //动画进行中不在执行动画
+        var index = options.icons.find("li.current").index();
+        var curindex = $(this).index();
+        if (index == curindex) {
+            return false;
+        } else {
+            var tid = curindex;
+            options.icons.find(".current").removeClass("current");
+            options.icons.find("li:eq(" + tid + ")").addClass("current");
+            if (tid > space && tid < size - space) {
+                options.icons.animate({ "left": (-(tid - space) * options.iconwidth) + "px" });
+            } else if (tid <= space && size > maxsize) {
+                options.icons.animate({ "left": "0" });
+            } else if (tid <= size - space && size > maxsize) {
+                options.icons.animate({ "left": (-(size - maxsize) * options.iconwidth) + "px" });
+            }
+            options.container.animate({ "left": (-(tid * options.conwidth)) + "px" });
+            if (tid >= size - 1 && size > maxsize) {
+                if (!options.iconright.hasClass("nohover")) {
+                    options.iconright.addClass("nohover");
+                }
+            }
+            if (tid < size - 1 && size > maxsize) {
+                if (options.iconright.hasClass("nohover")) {
+                    options.iconright.removeClass("nohover");
+                }
+            }
+            if (tid > 0 && size > maxsize) {
+                if (options.iconleft.hasClass("nohover")) {
+                    options.iconleft.removeClass("nohover");
+                }
+            }
+            if (tid == 0) {
+                if (!options.iconleft.hasClass("nohover")) {
+                    options.iconleft.addClass("nohover");
+                }
+            }
+        }
+    }
+    };
+    size = options.icons.find("li").size();
+    //初始化元素及绑定事件
+
+    options.icons.css("width", (size * options.iconwidth) + "px");
+
+    if (size > 0) {//当有图时绑定鼠标移动事件
+        options.icons.find("li:eq(0)").addClass("current");
+        options.container.css("width", (size * options.conwidth) + "px");
+
+        //设置焦点图上的图标显示，隐藏
+        options.conleft.mouseover(function () {
+            if (intshow > 0) { clearTimeout(intshow); }
+        }).mouseout(function () {
+            intshow = setTimeout(function () {
+                options.conleft.hide();
+                options.conright.hide();
+                options.consize.hide();
+            }, options.wait);
+        });
+        options.conright.mouseover(function () {
+            if (intshow > 0) { clearTimeout(intshow); }
+        }).mouseout(function () {
+            intshow = setTimeout(function () {
+                options.conleft.hide();
+                options.conright.hide();
+                options.consize.hide();
+            }, options.wait);
+        });
+        options.container.mouseover(function () {
+            if (intshow > 0) { clearTimeout(intshow); }
+            var index = options.icons.find("li.current").index();
+            options.conleft.show();
+            options.conright.show();
+            options.consize.show();
+            if (index == 0) {
+                options.conleft.hide();
+            }
+            if (index == size - 1) {
+                options.conright.hide();
+            }
+        }).mouseout(function () {
+            intshow = setTimeout(function () {
+                options.conleft.hide();
+                options.conright.hide();
+                options.consize.hide();
+            }, options.wait);
+        });
+
+    } else {//处理显示无图图片
+        options.container.append("<li><img src=\"http://img5.ucar.cn/1j/02140dsuvg.png\" alt=\"暂无图片\"></li>");
+        options.container.css("width", (options.conwidth) + "px");
+    }
+    if (size > 1) {//当大于1张图时候，绑定隐藏显示在大图上的箭头事件
+        options.conleft.click(options.clickleft);
+        options.conright.click(options.clickright);
+        options.icons.find("li").click(options.clickme);
+        
+    }
+    if (size > maxsize) {//绑定缩略图处事件
+        options.iconright.removeClass("nohover");
+        options.iconleft.click(options.clickleft);
+        options.iconright.click(options.clickright);
+    }
+}
+
+
+jQuery(function () {
+
+
+
+
+    $.scrollPics();
+
+	$('.allCarNum').html($('#chy_ifocus_piclist li').length);
+});
+
+
+
+</script>
+</body>
+</html>
