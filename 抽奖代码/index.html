@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/awardRotate.js"></script>
+<script type="text/javascript">
+//设置HTML的font-zise  
+(function (doc, win) {  
+  var docEl = doc.documentElement,  
+    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',  
+    recalc = function () {  
+      var clientWidth = docEl.clientWidth;  
+      if (!clientWidth) return;  
+      docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';  
+    };  
+  
+  if (!doc.addEventListener) return;  
+  win.addEventListener(resizeEvt, recalc, false);  
+  doc.addEventListener('DOMContentLoaded', recalc, false);  
+})(document, window);  
+//end     
+
+$(function (){
+	var num=3;
+	var rotateTimeOut = function (){
+		$('#rotate').rotate({
+			angle:0,
+			animateTo:2160,
+			duration:8000,
+			callback:function (){
+				alert('网络超时，请检查您的网络设置！');
+			}
+		});
+	};
+	var bRotate = false;
+
+	var rotateFn = function (awards, angles, txt){
+		bRotate = !bRotate;
+		$('#rotate').stopRotate();
+		$('#rotate').rotate({
+			angle:0,
+			animateTo:angles+1800,//中奖角度
+			duration:3000,//转动时间
+			callback:function (){//回调函数
+				alert(txt);
+				bRotate = !bRotate;
+			}
+		});
+		num--;//抽奖次数-1
+		$('.num').text(num);
+	};
+	
+		$('.pointer').click(function (){
+			if(num <1){
+				alert('您已经抽过3次啦，请明天继续回复话题参与抽奖吧！');
+				return false;	
+			}else{
+
+			if(bRotate)return;
+			
+			
+			var item = rnd(0,7);
+	
+			switch (item) {
+				case 0:
+					//var angle = [337,26, 88, 137, 185, 235, 287];
+					rotateFn(0, 330, '恭喜抽中5积分');
+					break;
+				case 1:
+					//var angle = [88, 137, 185, 235, 287];
+					rotateFn(1, 287, '恭喜抽中2积分');
+					break;
+				case 2:
+					//var angle = [137, 185, 235, 287];
+					rotateFn(2, 235, '恭喜抽中5积分');
+					break;
+				case 3:
+					//var angle = [137, 185, 235, 287];
+					rotateFn(3, 185, '恭喜抽中2积分');
+					break;
+				case 4:
+					//var angle = [185, 235, 287];
+					rotateFn(4, 137, '恭喜抽中8积分');
+					break;
+				case 5:
+					//var angle = [235, 287];
+					rotateFn(5, 88, '恭喜抽中2积分');
+					break;
+				case 6:
+					//var angle = [287];
+					rotateFn(6, 26, '恭喜抽中10积分');
+					break;
+			}
+	
+			
+			
+			
+			
+		}
+	});
+	
+});
+function rnd(n, m){
+	return Math.floor(Math.random()*(m-n+1)+n)
+	 
+}
+</script>
+
+</head>
+<body style="background:url(images/bg.jpg)  no-repeat; background-size:100%; background-color:rgb(210,69,30)">
+<br />
+<br />
+
+    <div class="turntable-bg">
+        <div class="pointer"><img src="images/pointer.png" alt="pointer"/></div>
+        <div class="rotate" ><img id="rotate" src="images/turntable2.png" alt="turntable" width="100%"  /></div>
+        
+        
+        
+
+    </div>
+
+<style>
+.turntable-bg{position:absolute; left:5%; width:90%; top:8rem}
+
+</style>
+</body>
+</html>
